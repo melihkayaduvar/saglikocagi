@@ -1,0 +1,56 @@
+# QT Projesi için Temel .gitignore
+
+# Derleme klasörleri
+build/
+*/build*
+*out/
+x64/
+x86/
+bin/
+*.pro.user
+*.user
+*.autosave
+
+# IDE özel dosyalar
+.vscode/
+.idea/
+*.suo
+*.ncb
+*.sdf
+
+# CMake üretilen dosyalar
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+install_manifest.txt
+compile_commands.json
+
+# QT özel dosyalar
+moc_*
+qrc_*
+ui_*
+*.moc
+*.qrc.d
+*.qmlc
+*.jsc
+
+# Derlenmiş çıktılar
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.o
+*.obj
+
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# QMake
+Makefile.*
+*.pro.user*
+*.qmake.stash

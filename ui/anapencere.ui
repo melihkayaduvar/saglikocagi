@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>anapencere</class>
+ <widget class="QMainWindow" name="anapencere">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>595</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Sağlık Ocağı Ana Pencere</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Hastane Teması QSS */
+QMainWindow#anapencere{
+	border-image: url(:/new/background/main-background2)
+}
+QWidget{
+	font-family: Arial, sans-serif;
+    color: #333; /* Metin rengi */
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton#ButtonEklenecekler{
+	background-color: rgba(76, 175, 80, 0.8);
+}
+QPushButton{
+    background-color: #4CAF50; /* Yeşil buton */
+    color: white;
+	border: 1px solid;
+    border-radius: 5px;
+    font-size: 9px;
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Hover durumunda daha koyu yeşil */
+}
+
+QPushButton:pressed {
+    background-color: #388e3c; /* Tıklanma sonrası yeşil */
+}
+
+QComboBox {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+QComboBox:hover {
+    border-color: #4CAF50; /* Hoverda yeşil sınır */
+}
+
+QTabWidget {
+    background-color: rgba(0, 0, 0, 0.3); /* Şeffaf arka plan */
+    border: none;
+}
+QScrollArea{
+	background-color: rgba(0,0,0,0.05);
+	border: none;
+}
+QTabWidget::pane {
+    background-color: transparent;
+    border: none;
+}
+/* Sekme çubuğu */
+QTabBar::tab {
+	background-color: rgba(43, 76, 147,1);
+    color: white;
+    font-family: &quot;Arial Black&quot;;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: 1px solid white;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+/* Seçili sekme */
+QTabBar::tab:selected {
+    background-color: rgba(43, 76, 147,0.6);
+    color: white;
+    border: 1px solid rgb(43, 76, 147);
+}
+
+/* Hover (fareyle üzerine gelindiğinde) */
+QTabBar::tab:hover {
+    background-color: rgba(29, 132, 132,0.6);
+    color: white;
+    border: 1px solid rgba(29, 132, 132,0.6);
+}
+
+QScrollBar:horizontal, QScrollBar:vertical {
+    background: #f0f8ff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 8px;
+    width: 8px;
+}
+
+QScrollBar::handle:horizontal, QScrollBar::handle:vertical {
+    background: #4CAF50;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover, QScrollBar::handle:vertical:hover {
+    background: #388e3c;
+}
+/* Menü çubuğu arka plan rengi ve sınırları */
+QMenuBar {
+    background-color:rgba(0, 0, 0, 0.2); 
+    color: white; /* Yazı rengi beyaz */
+	font-family: &quot;Arial Black&quot;;
+    font-size: 10px; /* Font boyutu */
+    font-weight: bold;
+    border: 1px; /* Kenarlık yok */
+    padding: 2px;
+}
+
+/* Menü öğeleri */
+QMenuBar::item {
+    background-color: transparent; /* Arka planı şeffaf */
+    color: white; /* Yazı rengi beyaz */
+    padding: 8px 15px; /* İç boşluk */
+}
+
+/* Menü öğeleri üzerine gelindiğinde renk değişimi */
+QMenuBar::item:selected {
+    background-color: rgba(43, 76, 147,0.6);
+    color: white;
+}
+
+/* Menü öğeleri üzerine gelindiğinde fareyle etkileşim */
+QMenuBar::item:hover {
+    background-color: rgba(29, 132, 132,0.6);
+    color: white;
+    border: 1px solid rgba(29, 132, 132,0.6);
+}
+
+/* Menü arka planı */
+QMenu {
+    background-color:rgba(21, 24, 62, 0.4);  /* Koyu gri arka plan */
+    border: 1px solid #555; /* Gri kenarlık */
+    color: white; /* Menü öğesi yazı rengi beyaz */
+    padding: 5px;
+}
+
+/* Menü öğelerinin üzerine gelindiğinde değişiklik */
+QMenu::item {
+    padding: 8px 15px; /* Menü öğesi iç boşluğu */
+    background-color: transparent; /* Arka planı şeffaf */
+}
+
+QMenu::item:selected {
+    background-color: rgba(43, 76, 147,0.6);
+    color: white;
+}
+
+/* Menü öğeleri üzerine gelindiğinde */
+QMenu::item:hover {
+    background-color: rgba(29, 132, 132,0.6);
+    color: white;
+    border: 1px solid rgba(29, 132, 132,0.6);
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>381</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>true</kerning>
+      <fontweight>ExtraBold</fontweight>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+    background-color: #4CAF50; /* Yeşil buton */
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+}
+
+QPushButton:hover {
+    background-color: #45a049; /* Hover durumunda daha koyu yeşil */
+}
+
+QPushButton:pressed {
+    background-color: #388e3c; /* Tıklanma sonrası yeşil */
+}
+</string>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::TabPosition::South</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::TabShape::Triangular</enum>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::TextElideMode::ElideNone</enum>
+    </property>
+    <property name="movable">
+     <bool>false</bool>
+    </property>
+    <property name="tabBarAutoHide">
+     <bool>false</bool>
+    </property>
+    <widget class="QWidget" name="tab">
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <bold>false</bold>
+      </font>
+     </property>
+     <attribute name="title">
+      <string>Doktor</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="Buttonnewdoktor">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Yeni Doktor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Buttondoktorlist">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Doktorlar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Hasta</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="Buttonnewhasta">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Yeni Hasta</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Buttonhastalist">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hastalar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Ziyaret</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="Buttonnewziyaret">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Yeni Ziyaret</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Buttonziyaretlist">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Ziyaretler</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="Buttonnewtetkikiste">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Tetkik İste</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Buttonistenentetkikliste">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>İstenen Tetkikler</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QPushButton" name="Buttonnewrecete">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Yeni Recete</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Buttonrecetelist">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Receteler</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QPushButton" name="Buttonnewbulgu">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Yeni Bulgu</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Buttonbulgulist">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Bulgular</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>İlaç, Tetkik</string>
+     </attribute>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="1" column="2">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QPushButton" name="Buttonnewilac">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Yeni İlaç</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Buttonilaclist">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>İlaçlar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="Buttonnewtetkik">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Yeni Tetkik</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Buttontetkiklist">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Tetkikler</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="2">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>411</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTextEdit{
+	background-color: rgba(0, 0, 0, 0.03);
+	border:1px solid;
+	border-color: rgb(0, 0, 0);
+}</string>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>391</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QTextEdit" name="teEklenecekler">
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Arial','sans-serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;♦ Ziyaret kategorisindeki Tetkik İste, Yeni Reçete ve Yeni Bulgu&lt;br /&gt;butonları kaldırılıp direk olarak ziyaret oluştururken sorulacak.&lt;br /&gt;♦ QSS Renk skalası değiştirilecek.&lt;br /&gt;♦ Background değiştirilecek.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="ButtonEklenecekler">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>290</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>-1</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Eklenecekler Göster/Gizle</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>595</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDoktor">
+    <property name="title">
+     <string>Doktor</string>
+    </property>
+    <addaction name="actiondoktorekle"/>
+    <addaction name="actiondoktorlist"/>
+   </widget>
+   <widget class="QMenu" name="menuHasta">
+    <property name="title">
+     <string>Hasta</string>
+    </property>
+    <addaction name="actionhastaekle"/>
+    <addaction name="actionhastalist"/>
+   </widget>
+   <widget class="QMenu" name="menuZiyaret">
+    <property name="title">
+     <string>Ziyaret</string>
+    </property>
+    <addaction name="actionziyaretekle"/>
+    <addaction name="actionistetnentetkikekle"/>
+    <addaction name="actionreceteekle"/>
+    <addaction name="actionbulguekle"/>
+    <addaction name="separator"/>
+    <addaction name="actionziyaretlist"/>
+    <addaction name="actionistenentetkiklist"/>
+    <addaction name="actionrecetelist"/>
+    <addaction name="actionbulgulist"/>
+   </widget>
+   <widget class="QMenu" name="menu_la">
+    <property name="title">
+     <string>İlaç ve Tetkik</string>
+    </property>
+    <addaction name="actionilacekle"/>
+    <addaction name="actiontetkikekle"/>
+    <addaction name="separator"/>
+    <addaction name="actionilaclist"/>
+    <addaction name="actiontetkiklist"/>
+   </widget>
+   <widget class="QMenu" name="menuDosya">
+    <property name="title">
+     <string>Dosya</string>
+    </property>
+    <addaction name="action_k"/>
+   </widget>
+   <addaction name="menuDosya"/>
+   <addaction name="menuDoktor"/>
+   <addaction name="menuHasta"/>
+   <addaction name="menuZiyaret"/>
+   <addaction name="menu_la"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actiondoktorekle">
+   <property name="text">
+    <string>Yeni Doktor</string>
+   </property>
+  </action>
+  <action name="actiondoktorlist">
+   <property name="text">
+    <string>Doktor Listesi</string>
+   </property>
+  </action>
+  <action name="actionhastaekle">
+   <property name="text">
+    <string>Yeni Hasta</string>
+   </property>
+  </action>
+  <action name="actionhastalist">
+   <property name="text">
+    <string>Hasta Listesi</string>
+   </property>
+  </action>
+  <action name="actionziyaretlist">
+   <property name="text">
+    <string>Ziyaret Listesi</string>
+   </property>
+  </action>
+  <action name="actionziyaretekle">
+   <property name="text">
+    <string>Yeni Ziyaret</string>
+   </property>
+  </action>
+  <action name="actionilacekle">
+   <property name="text">
+    <string>Yeni İlaç</string>
+   </property>
+  </action>
+  <action name="actionilaclist">
+   <property name="text">
+    <string>İlaç Listesi</string>
+   </property>
+  </action>
+  <action name="action_k">
+   <property name="text">
+    <string>Çıkış</string>
+   </property>
+  </action>
+  <action name="actiontetkikekle">
+   <property name="text">
+    <string>Yeni Tetkik</string>
+   </property>
+  </action>
+  <action name="actiontetkiklist">
+   <property name="text">
+    <string>Tetkik Listesi</string>
+   </property>
+  </action>
+  <action name="actionistetnentetkikekle">
+   <property name="text">
+    <string>Tetkik İste</string>
+   </property>
+  </action>
+  <action name="actionreceteekle">
+   <property name="text">
+    <string>Yeni Reçete</string>
+   </property>
+  </action>
+  <action name="actionistenentetkiklist">
+   <property name="text">
+    <string>İstenen Tetkikler</string>
+   </property>
+  </action>
+  <action name="actionrecetelist">
+   <property name="text">
+    <string>Receteler</string>
+   </property>
+  </action>
+  <action name="actiontetkikduzenle">
+   <property name="text">
+    <string>Tetkik Düzenle</string>
+   </property>
+  </action>
+  <action name="actionbulguekle">
+   <property name="text">
+    <string>Yeni Bulgu</string>
+   </property>
+  </action>
+  <action name="actionbulgulist">
+   <property name="text">
+    <string>Bulgular</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>Buttonhastalist</sender>
+   <signal>clicked()</signal>
+   <receiver>actionhastalist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>360</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttontetkiklist</sender>
+   <signal>clicked()</signal>
+   <receiver>actiontetkiklist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonrecetelist</sender>
+   <signal>clicked()</signal>
+   <receiver>actionrecetelist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewrecete</sender>
+   <signal>clicked()</signal>
+   <receiver>actionreceteekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewziyaret</sender>
+   <signal>clicked()</signal>
+   <receiver>actionziyaretekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewtetkikiste</sender>
+   <signal>clicked()</signal>
+   <receiver>actionistetnentetkikekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewilac</sender>
+   <signal>clicked()</signal>
+   <receiver>actionilacekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonistenentetkikliste</sender>
+   <signal>clicked()</signal>
+   <receiver>actionistenentetkiklist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonilaclist</sender>
+   <signal>clicked()</signal>
+   <receiver>actionilaclist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewhasta</sender>
+   <signal>clicked()</signal>
+   <receiver>actionhastaekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewtetkik</sender>
+   <signal>clicked()</signal>
+   <receiver>actiontetkikekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonziyaretlist</sender>
+   <signal>clicked()</signal>
+   <receiver>actionziyaretlist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttondoktorlist</sender>
+   <signal>clicked()</signal>
+   <receiver>actiondoktorlist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>360</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewdoktor</sender>
+   <signal>clicked()</signal>
+   <receiver>actiondoktorekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>187</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonnewbulgu</sender>
+   <signal>clicked()</signal>
+   <receiver>actionbulguekle</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>114</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Buttonbulgulist</sender>
+   <signal>clicked()</signal>
+   <receiver>actionbulgulist</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>360</x>
+     <y>478</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

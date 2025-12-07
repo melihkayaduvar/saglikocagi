@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/background">
+        <file alias="main-background">hopitalbackground.png</file>
+        <file alias="main-background2">background.png</file>
+    </qresource>
+</RCC>

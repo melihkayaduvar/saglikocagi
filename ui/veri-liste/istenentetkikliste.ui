@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>istenentetkikliste</class>
+ <widget class="QDialog" name="istenentetkikliste">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>475</width>
+    <height>284</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>İstenen Tetkikler</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTableWidget" name="tableWidget">
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ISTEK TARIHI</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SONUC TARIHI</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SONUC</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>YORUM</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>DURUM</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ZIYARET</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>TETKIK</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lblAra">
+       <property name="text">
+        <string>Ara</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="leAra"/>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnDuzenle">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Düzenle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnSil">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Sil</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

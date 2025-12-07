@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HastaListe</class>
+ <widget class="QDialog" name="HastaListe">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>385</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Hastalar</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTableWidget" name="tableWidget">
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ADI</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>SOYADI</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>CINSIYET</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>DOGUM TARIHI</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>TC KIMLIK</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>TELEFON</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ADRES</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>KAN GRUBU</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ALERJILER</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>KRONIK HASTALIKLAR</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ZIYARETLER</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lblAra">
+       <property name="text">
+        <string>Ara</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="leAra"/>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="btnHastaOlustur">
+       <property name="text">
+        <string>Hasta Oluştur</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="btnBilgi">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Bilgi</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSil">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Sil</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

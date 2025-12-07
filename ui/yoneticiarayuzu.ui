@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>yoneticiarayuzu</class>
+ <widget class="QMainWindow" name="yoneticiarayuzu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>708</width>
+    <height>569</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Yönetici Arayüzü</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="5" column="0" rowspan="2">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Duyuru Paylaş</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>&amp;Başlık</string>
+         </property>
+         <property name="buddy">
+          <cstring>leDuyuruBaslik</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="leDuyuruBaslik"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>&amp;Metin</string>
+         </property>
+         <property name="buddy">
+          <cstring>teDuyuruMetin</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTextEdit" name="teDuyuruMetin"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="BtnDuyuru">
+         <property name="text">
+          <string>Paylaş</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="BtnDoktor">
+        <property name="text">
+         <string>&amp;DOKTOR İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnHasta">
+        <property name="text">
+         <string>&amp;HASTA İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnIlac">
+        <property name="text">
+         <string>&amp;İLAÇ İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnTetkik">
+        <property name="text">
+         <string>&amp;TETKİK İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>İstatistikler</string>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&amp;Doktor Sayısı</string>
+         </property>
+         <property name="buddy">
+          <cstring>leDoktorSayisi</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="leDoktorSayisi">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>&amp;Hasta Sayısı</string>
+         </property>
+         <property name="buddy">
+          <cstring>leHastaSayisi</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="leHastaSayisi">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>&amp;Toplam Ziyaret Sayısı</string>
+         </property>
+         <property name="buddy">
+          <cstring>leToplamZiyaretSayisi</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="leToplamZiyaretSayisi">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>&amp;Yazılan Reçete Sayısı</string>
+         </property>
+         <property name="buddy">
+          <cstring>leYazilanReceteSayisi</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="leYazilanReceteSayisi">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>&amp;En Çok Yazılan İlaç</string>
+         </property>
+         <property name="buddy">
+          <cstring>leEnCokYazilanIlac</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="leEnCokYazilanIlac">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>Duyurular</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0" colspan="2">
+        <widget class="QTextBrowser" name="tbDuyurular"/>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>ID:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="leID"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDuyuruSil">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Sil</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnTumuSil">
+         <property name="text">
+          <string>Tümünü Sil</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QPushButton" name="BtnYedekle">
+      <property name="text">
+       <string>&amp;Yedekle/Dışa Aktar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>708</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDosya">
+    <property name="title">
+     <string>Dosya</string>
+    </property>
+    <addaction name="actExit"/>
+   </widget>
+   <addaction name="menuDosya"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actExit">
+   <property name="text">
+    <string>Çıkış</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>BtnDoktor</tabstop>
+  <tabstop>BtnHasta</tabstop>
+  <tabstop>BtnIlac</tabstop>
+  <tabstop>BtnTetkik</tabstop>
+  <tabstop>leDuyuruBaslik</tabstop>
+  <tabstop>teDuyuruMetin</tabstop>
+  <tabstop>BtnDuyuru</tabstop>
+  <tabstop>leDoktorSayisi</tabstop>
+  <tabstop>leHastaSayisi</tabstop>
+  <tabstop>leToplamZiyaretSayisi</tabstop>
+  <tabstop>leYazilanReceteSayisi</tabstop>
+  <tabstop>leEnCokYazilanIlac</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

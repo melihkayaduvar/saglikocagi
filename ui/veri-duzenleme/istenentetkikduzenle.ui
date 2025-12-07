@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>istenentetkikduzenle</class>
+ <widget class="QDialog" name="istenentetkikduzenle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>406</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>350</width>
+    <height>406</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>İstenen Tetkik Güncelle</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <widget class="QLineEdit" name="leziyaret">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblistektarihi">
+       <property name="text">
+        <string>İstek Tarihi</string>
+       </property>
+       <property name="buddy">
+        <cstring>dteistektarihi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDateTimeEdit" name="dteistektarihi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblmevcutdurum">
+       <property name="text">
+        <string>Mevcut Durum</string>
+       </property>
+       <property name="buddy">
+        <cstring>lemevcutdrurum</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lemevcutdrurum">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblistenentetkik">
+       <property name="text">
+        <string>İstenen Tetkik</string>
+       </property>
+       <property name="buddy">
+        <cstring>leistenentetkik</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="leistenentetkik">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>435</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="5" column="1">
+      <widget class="QTextEdit" name="teyorum"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblsonuc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Sonuç</string>
+       </property>
+       <property name="buddy">
+        <cstring>lesonuc</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="cbyenidurum">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Örnek Alındı</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Çalışılıyor</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sonuçlandı</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>İptal Edildi</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDateTimeEdit" name="dtesonuctarihi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblyorum">
+       <property name="text">
+        <string>Yorum</string>
+       </property>
+       <property name="buddy">
+        <cstring>teyorum</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lesonuc">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblsonuctarihi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Sonuç Tarihi</string>
+       </property>
+       <property name="buddy">
+        <cstring>dtesonuctarihi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblyenidurum">
+       <property name="text">
+        <string>Yeni Durum</string>
+       </property>
+       <property name="buddy">
+        <cstring>cbyenidurum</cstring>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnKaydet">
+       <property name="text">
+        <string>Kaydet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVazgec">
+       <property name="text">
+        <string>Vazgeç</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>leziyaret</tabstop>
+  <tabstop>dteistektarihi</tabstop>
+  <tabstop>lemevcutdrurum</tabstop>
+  <tabstop>leistenentetkik</tabstop>
+  <tabstop>cbyenidurum</tabstop>
+  <tabstop>dtesonuctarihi</tabstop>
+  <tabstop>lesonuc</tabstop>
+  <tabstop>teyorum</tabstop>
+  <tabstop>btnKaydet</tabstop>
+  <tabstop>btnVazgec</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnVazgec</sender>
+   <signal>clicked()</signal>
+   <receiver>istenentetkikduzenle</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>339</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>546</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

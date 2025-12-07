@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tetkikekle</class>
+ <widget class="QDialog" name="tetkikekle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>488</width>
+    <height>282</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>488</width>
+    <height>282</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Yeni Tetkik Ekle</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblAdi">
+       <property name="text">
+        <string>&amp;Tetkik Adı</string>
+       </property>
+       <property name="buddy">
+        <cstring>leAdi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="leNormaldegerErkek">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leAdi"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblDegerler">
+       <property name="text">
+        <string>&amp;Normal Değerler Erkek</string>
+       </property>
+       <property name="buddy">
+        <cstring>leNormaldegerErkek</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QTextEdit" name="teAciklama"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblAciklama">
+       <property name="text">
+        <string>&amp;Açıklama</string>
+       </property>
+       <property name="buddy">
+        <cstring>teAciklama</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblDegerler_2">
+       <property name="text">
+        <string>&amp;Normal Değerler Kadın</string>
+       </property>
+       <property name="buddy">
+        <cstring>leNormaldegerKadin</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="leNormaldegerKadin"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="btnKayder">
+       <property name="text">
+        <string>Tetkik Ekle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnVazgec">
+       <property name="text">
+        <string>Vazgec</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>leAdi</tabstop>
+  <tabstop>teAciklama</tabstop>
+  <tabstop>leNormaldegerErkek</tabstop>
+  <tabstop>leNormaldegerKadin</tabstop>
+  <tabstop>btnKayder</tabstop>
+  <tabstop>btnVazgec</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnKayder</sender>
+   <signal>clicked()</signal>
+   <receiver>tetkikekle</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>363</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVazgec</sender>
+   <signal>clicked()</signal>
+   <receiver>tetkikekle</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>450</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

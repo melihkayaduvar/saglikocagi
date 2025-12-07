@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IlacEkle</class>
+ <widget class="QDialog" name="IlacEkle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>262</width>
+    <height>247</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>262</width>
+    <height>247</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Yeni İlaç Ekle</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="lblBarkod">
+     <property name="text">
+      <string>&amp;Barkod</string>
+     </property>
+     <property name="buddy">
+      <cstring>leBarkod</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="lblAdi">
+     <property name="text">
+      <string>&amp;İlaç Adı</string>
+     </property>
+     <property name="buddy">
+      <cstring>leAdi</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="lblEtkenMad">
+     <property name="text">
+      <string>&amp;Etken Madde</string>
+     </property>
+     <property name="buddy">
+      <cstring>leEtkenMad</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="lblForm">
+     <property name="text">
+      <string>&amp;Form</string>
+     </property>
+     <property name="buddy">
+      <cstring>leForm</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="lblDozaj">
+     <property name="text">
+      <string>&amp;Dozaj Bilgisi</string>
+     </property>
+     <property name="buddy">
+      <cstring>leDozaj</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>191</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="5" column="3">
+    <widget class="QPushButton" name="btnkaydet">
+     <property name="text">
+      <string>İlaç Oluştur</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>191</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="3">
+    <widget class="QPushButton" name="btnVazgec">
+     <property name="text">
+      <string>Vazgeç</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="3">
+    <widget class="QLineEdit" name="leDozaj"/>
+   </item>
+   <item row="3" column="1" colspan="3">
+    <widget class="QLineEdit" name="leForm"/>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QLineEdit" name="leEtkenMad"/>
+   </item>
+   <item row="1" column="1" colspan="3">
+    <widget class="QLineEdit" name="leAdi"/>
+   </item>
+   <item row="0" column="1" colspan="3">
+    <widget class="QLineEdit" name="leBarkod">
+     <property name="inputMask">
+      <string>0 000 000;_</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>leBarkod</tabstop>
+  <tabstop>leAdi</tabstop>
+  <tabstop>leEtkenMad</tabstop>
+  <tabstop>leForm</tabstop>
+  <tabstop>leDozaj</tabstop>
+  <tabstop>btnkaydet</tabstop>
+  <tabstop>btnVazgec</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnkaydet</sender>
+   <signal>clicked()</signal>
+   <receiver>IlacEkle</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>248</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVazgec</sender>
+   <signal>clicked()</signal>
+   <receiver>IlacEkle</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

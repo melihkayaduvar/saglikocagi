@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>receteekle</class>
+ <widget class="QDialog" name="receteekle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>430</width>
+    <height>388</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>430</width>
+    <height>388</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Yeni Reçete Oluştur</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="2" column="2" colspan="2">
+    <layout class="QFormLayout" name="formLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblReceteTarihi">
+       <property name="text">
+        <string>Reçete Tarihi</string>
+       </property>
+       <property name="buddy">
+        <cstring>deReceteTarihi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDateEdit" name="deReceteTarihi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblgecerliliksuresi">
+       <property name="text">
+        <string>Geçerlilik Süresi (gün)</string>
+       </property>
+       <property name="buddy">
+        <cstring>leGecerlilikSuresi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="leGecerlilikSuresi">
+       <property name="inputMask">
+        <string>000</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnEkle">
+         <property name="text">
+          <string>Ekle</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSil">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Sil</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="btnKaydet">
+         <property name="text">
+          <string>Reçete Oluştur</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnVazgec">
+         <property name="text">
+          <string>Vazgeç</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0" rowspan="2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="6" column="0" rowspan="2">
+      <widget class="QLabel" name="lblAdet">
+       <property name="text">
+        <string>Adet</string>
+       </property>
+       <property name="buddy">
+        <cstring>leAdet</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblPeriyot">
+       <property name="text">
+        <string>Periyot</string>
+       </property>
+       <property name="buddy">
+        <cstring>lePeriyot</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QLabel" name="lblKullanimSekli">
+       <property name="text">
+        <string>Kullanım Şekli</string>
+       </property>
+       <property name="buddy">
+        <cstring>teKullanimSekli</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblDoz">
+       <property name="text">
+        <string>Doz</string>
+       </property>
+       <property name="buddy">
+        <cstring>leDoz</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="leAdet">
+       <property name="inputMask">
+        <string>000</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="QTextEdit" name="teKullanimSekli"/>
+     </item>
+     <item row="5" column="1" rowspan="2">
+      <widget class="QLineEdit" name="lePeriyot"/>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QComboBox" name="cbIlaclar"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblIlac">
+       <property name="text">
+        <string>İlaç</string>
+       </property>
+       <property name="buddy">
+        <cstring>cbIlaclar</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="leDoz"/>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="2">
+      <widget class="QComboBox" name="cbZiyaretler"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblReceteKalemi">
+       <property name="text">
+        <string>Reçete Kalemleri</string>
+       </property>
+       <property name="buddy">
+        <cstring>lwReceteKalemleri</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblZiyaret">
+       <property name="text">
+        <string>Ziyaret</string>
+       </property>
+       <property name="buddy">
+        <cstring>cbZiyaretler</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QListWidget" name="lwReceteKalemleri"/>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="1">
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cbZiyaretler</tabstop>
+  <tabstop>cbIlaclar</tabstop>
+  <tabstop>teKullanimSekli</tabstop>
+  <tabstop>leDoz</tabstop>
+  <tabstop>lePeriyot</tabstop>
+  <tabstop>leAdet</tabstop>
+  <tabstop>btnEkle</tabstop>
+  <tabstop>lwReceteKalemleri</tabstop>
+  <tabstop>btnSil</tabstop>
+  <tabstop>deReceteTarihi</tabstop>
+  <tabstop>leGecerlilikSuresi</tabstop>
+  <tabstop>btnKaydet</tabstop>
+  <tabstop>btnVazgec</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnKaydet</sender>
+   <signal>clicked()</signal>
+   <receiver>receteekle</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnVazgec</sender>
+   <signal>clicked()</signal>
+   <receiver>receteekle</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>418</x>
+     <y>376</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
