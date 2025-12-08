@@ -48,7 +48,7 @@ void VERITABANI::sqlAyarlariniYap()
     });
 
     tblDoktor.setSqlSilmeIslemi([this](quint32 id){
-        QSqlQuery q; q.prepare("DELETE FROM doktorlar WHERE id=?"); q.addBindValue(id);
+        QSqlQuery q; q.prepare("DELETE FROM doktorlar WHERE id=?"); q.addBindValue(id); q.exec();
         q.prepare("DELETE FROM doktorpass WHERE id=?"); q.addBindValue(id); q.exec();
     });
 
@@ -68,7 +68,7 @@ void VERITABANI::sqlAyarlariniYap()
     tblHasta.setSqlEklemeIslemi([this](HastaTablosu::VeriPointer h){
         QSqlQuery q;
         // Not: StringList olan alerjiler ve kronik hastalıkları join ile birleştirip kaydediyoruz
-        q.prepare("INSERT INTO hastalar (tc_no, ad, soyad, telefon, dogum_tarihi, cinsiyet, adres, kan_grubu, alerjiler, kronik_hastaliklar) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        q.prepare("INSERT INTO hastalar (tc_no, ad, soyad, telefon, dogum_tarihi, cinsiyet, adres, kan_grubu) VALUES (?,?,?,?,?,?,?,?,)");
         q.addBindValue(h->tckimlik());
         q.addBindValue(h->adi());
         q.addBindValue(h->soyadi());
@@ -77,20 +77,38 @@ void VERITABANI::sqlAyarlariniYap()
         q.addBindValue(static_cast<int>(h->cinsiyet())); // Enum int olarak kaydedilir
         q.addBindValue(h->adres());
         q.addBindValue(h->kanGrubu());
-        q.addBindValue(h->alerjiler().join(",")); // Listeyi virgülle ayırıp string yap
-        q.addBindValue(h->kronikHastaliklar().join(","));
 
-        if(q.exec()) h->setId(q.lastInsertId().toInt());
+        if(q.exec()) {
+            int yeniHastaid = q.lastInsertId().toInt();
+            h->setId(yeniHastaid);
+
+            QSqlQuery qAlt;
+            qAlt.prepare("INSERT INTO hasta_alerjiler (hasta_id, alerji_adi) VALUES (?,?)");
+            for(const QString &alerji:h->alerjiler()){
+                qAlt.bindValue(0, yeniHastaid);
+                qAlt.bindValue(1, alerji);
+                qAlt.exec();
+            }
+            qAlt.prepare("INSERT INTO hasta_kronik_hastaliklar (hasta_id, hastalik_adi) VALUES (?,?)");
+            for(const QString &hastalik:h->kronikHastaliklar()){
+                qAlt.bindValue(0, yeniHastaid);
+                qAlt.bindValue(1, hastalik);
+                qAlt.exec();
+            }
+        }
         else qDebug() << "Hasta Ekleme Hatası:" << q.lastError().text();
     });
 
     tblHasta.setSqlSilmeIslemi([this](quint32 id){
-        QSqlQuery q; q.prepare("DELETE FROM hastalar WHERE id=?"); q.addBindValue(id); q.exec();
+        QSqlQuery q;
+        q.prepare("DELETE FROM hasta_alerjiler WHERE hasta_id=?"); q.addBindValue(id); q.exec();
+        q.prepare("DELETE FROM hasta_kronik_hastaliklar WHERE hasta_id=?"); q.addBindValue(id); q.exec();
+        q.prepare("DELETE FROM hastalar WHERE id=?"); q.addBindValue(id); q.exec();
     });
 
     tblHasta.setSqlGuncellemeIslemi([](HastaTablosu::VeriPointer h){
         QSqlQuery q;
-        q.prepare("UPDATE hastalar SET tc_no=?, ad=?, soyad=?, telefon=?, dogum_tarihi=?, cinsiyet=?, adres=?, kan_grubu=?, alerjiler=?, kronik_hastaliklar=? WHERE id=?");
+        q.prepare("UPDATE hastalar SET tc_no=?, ad=?, soyad=?, telefon=?, dogum_tarihi=?, cinsiyet=?, adres=?, kan_grubu=? WHERE id=?");
         q.addBindValue(h->tckimlik());
         q.addBindValue(h->adi());
         q.addBindValue(h->soyadi());
@@ -99,10 +117,31 @@ void VERITABANI::sqlAyarlariniYap()
         q.addBindValue(static_cast<int>(h->cinsiyet()));
         q.addBindValue(h->adres());
         q.addBindValue(h->kanGrubu());
-        q.addBindValue(h->alerjiler().join(","));
-        q.addBindValue(h->kronikHastaliklar().join(","));
         q.addBindValue(h->id());
-        if(!q.exec()) qDebug() << "Hasta Güncelleme Hatası: " << q.lastError().text();
+        if(!q.exec()) {
+            qDebug() << "Hasta Güncelleme Hatası: " << q.lastError().text();
+            return;
+        }
+        QSqlQuery qSil;
+        qSil.prepare("DELETE FROM hasta_alerjiler WHERE hasta_id=?");
+        qSil.addBindValue(h->id());
+        qSil.exec();
+        qSil.prepare("DELETE FROM hasta_kronik_hastaliklar WHERE hasta_id=?");
+        qSil.addBindValue(h->id());
+        qSil.exec();
+        QSqlQuery qEkle;
+        qEkle.prepare("INSERT INTO hasta_alerjiler (hasta_id, alerji_adi) VALUES (?,?)");
+        for(const QString &alerji:h->alerjiler()){
+            qEkle.bindValue(0,h->id());
+            qEkle.bindValue(1,alerji);
+            qEkle.exec();
+        }
+        qEkle.prepare("INSERT INTO hasta_kronik_hastaliklar (hasta_id, hastalik_adi) VALUES (?,?)");
+        for(const QString &hastalik:h->kronikHastaliklar()){
+            qEkle.bindValue(0,h->id());
+            qEkle.bindValue(1,hastalik);
+            qEkle.exec();
+        }
     });
 
     tblBulgu.setSqlEklemeIslemi([this](BulguTablosu::VeriPointer b){
@@ -394,10 +433,28 @@ void VERITABANI::ilkYukleme()
         h->setCinsiyet((CinsiyetEnum)qHasta.value("cinsiyet").toInt());
         h->setAdres(qHasta.value("adres").toString());
         h->setKanGrubu(qHasta.value("kan_grubu").toString());
-        // String olarak gelen listeyi virgüllerden ayırıp listeye çevir
-        h->setAlerjiler(qHasta.value("alerjiler").toString().split(","));
-        h->setKronikHastaliklar(qHasta.value("kronik_hastaliklar").toString().split(","));
+        QStringList alerjiListesi;
+        QSqlQuery qAlerji;
+        qAlerji.prepare("SELET alerji_adi FROM hasta_alerjiler WHERE hasta_id=?");
+        qAlerji.addBindValue(h->id());
+        if(qAlerji.exec()){
+            while (qAlerji.next()) {
+                alerjiListesi.append(qAlerji.value(0).toString());
+            }
+        }
 
+        h->setAlerjiler(alerjiListesi);
+
+        QStringList khastalikListesi;
+        QSqlQuery qKhastalik;
+        qKhastalik.prepare("SELET hastalik_adi FROM hasta_kronik_hastaliklar WHERE hasta_id=?");
+        qKhastalik.addBindValue(h->id());
+        if(qKhastalik.exec()){
+            while (qKhastalik.next()) {
+                khastalikListesi.append(qKhastalik.value(0).toString());
+            }
+        }
+        h->setKronikHastaliklar(khastalikListesi);
         tblHasta.ramEkle(h);
     }
 
