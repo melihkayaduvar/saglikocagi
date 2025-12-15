@@ -22,6 +22,7 @@ public:
     void tablewidget_silmesecimi();
     void duzenleTiklandi();
     void bilgiTiklandi();
+    void close();
 private slots:
     void on_leAra_textChanged(const QString &arg1);
 private:

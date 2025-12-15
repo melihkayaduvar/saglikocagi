@@ -17,7 +17,7 @@ yoneticiarayuzu::yoneticiarayuzu(quint32 yonid,QWidget *parent)
     yenile();
     yoneticiarayuzu::duyurulariYenile();
     ui->leID->setValidator(new QIntValidator(0, 999999, this));
-
+    ui->leAktifID->setText(QString::number(m_yoneticiID));
 }
 yoneticiarayuzu::~yoneticiarayuzu()
 {
@@ -64,6 +64,7 @@ QString yoneticiarayuzu::enCokYazilanIlac()
 void yoneticiarayuzu::on_BtnDoktor_clicked()
 {
     DoktorListe doktorfrm;
+    doktorfrm.setAttribute(Qt::WA_QuitOnClose, false);
     doktorfrm.exec();
     yenile();
 }
@@ -72,6 +73,7 @@ void yoneticiarayuzu::on_BtnDoktor_clicked()
 void yoneticiarayuzu::on_BtnHasta_clicked()
 {
     HastaListe hastafrm;
+    hastafrm.setAttribute(Qt::WA_QuitOnClose, false);
     hastafrm.exec();
     yenile();
 }
@@ -80,6 +82,7 @@ void yoneticiarayuzu::on_BtnHasta_clicked()
 void yoneticiarayuzu::on_BtnIlac_clicked()
 {
     IlacListe ilacfrm;
+    ilacfrm.setAttribute(Qt::WA_QuitOnClose, false);
     ilacfrm.exec();
     yenile();
 }
@@ -88,6 +91,7 @@ void yoneticiarayuzu::on_BtnIlac_clicked()
 void yoneticiarayuzu::on_BtnTetkik_clicked()
 {
     TetkikListe tetkikfrm;
+    tetkikfrm.setAttribute(Qt::WA_QuitOnClose, false);
     tetkikfrm.exec();
     yenile();
 }
@@ -194,8 +198,8 @@ void yoneticiarayuzu::on_leID_textChanged(const QString &arg1)
 
 void yoneticiarayuzu::on_actExit_triggered()
 {
-    //VERITABANI::vt().kaydet();
     ui->tbDuyurular->clear();
+    ui->leAktifID->clear();
     emit oturumKapatildi();
     this->close();
 }

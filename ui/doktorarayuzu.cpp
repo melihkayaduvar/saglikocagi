@@ -43,6 +43,7 @@ void doktorarayuzu::duyurulariYenile()
 void doktorarayuzu::on_btnHastalar_clicked()
 {
     dkHastaListe hastafrm;
+    hastafrm.setAttribute(Qt::WA_QuitOnClose, false);
     hastafrm.exec();
 }
 

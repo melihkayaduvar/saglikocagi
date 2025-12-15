@@ -435,7 +435,7 @@ void VERITABANI::ilkYukleme()
         h->setKanGrubu(qHasta.value("kan_grubu").toString());
         QStringList alerjiListesi;
         QSqlQuery qAlerji;
-        qAlerji.prepare("SELET alerji_adi FROM hasta_alerjiler WHERE hasta_id=?");
+        qAlerji.prepare("SELECT alerji_adi FROM hasta_alerjiler WHERE hasta_id=?");
         qAlerji.addBindValue(h->id());
         if(qAlerji.exec()){
             while (qAlerji.next()) {
@@ -447,7 +447,7 @@ void VERITABANI::ilkYukleme()
 
         QStringList khastalikListesi;
         QSqlQuery qKhastalik;
-        qKhastalik.prepare("SELET hastalik_adi FROM hasta_kronik_hastaliklar WHERE hasta_id=?");
+        qKhastalik.prepare("SELECT hastalik_adi FROM hasta_kronik_hastaliklar WHERE hasta_id=?");
         qKhastalik.addBindValue(h->id());
         if(qKhastalik.exec()){
             while (qKhastalik.next()) {

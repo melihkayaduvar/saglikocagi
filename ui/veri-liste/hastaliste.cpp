@@ -200,4 +200,3 @@ void HastaListe::on_btnHastaOlustur_clicked()
     }
     ara();
 }
-

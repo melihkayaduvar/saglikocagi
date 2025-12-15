@@ -15,81 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="5" column="0" rowspan="2">
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Duyuru Paylaş</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>&amp;Başlık</string>
-         </property>
-         <property name="buddy">
-          <cstring>leDuyuruBaslik</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="leDuyuruBaslik"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>&amp;Metin</string>
-         </property>
-         <property name="buddy">
-          <cstring>teDuyuruMetin</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QTextEdit" name="teDuyuruMetin"/>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QPushButton" name="BtnDuyuru">
-         <property name="text">
-          <string>Paylaş</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="BtnDoktor">
-        <property name="text">
-         <string>&amp;DOKTOR İŞLEMLERİ</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BtnHasta">
-        <property name="text">
-         <string>&amp;HASTA İŞLEMLERİ</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BtnIlac">
-        <property name="text">
-         <string>&amp;İLAÇ İŞLEMLERİ</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="BtnTetkik">
-        <property name="text">
-         <string>&amp;TETKİK İŞLEMLERİ</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
        <string>İstatistikler</string>
@@ -183,7 +109,7 @@
       </layout>
      </widget>
     </item>
-    <item row="5" column="1">
+    <item row="6" column="1">
      <widget class="QGroupBox" name="groupBox_3">
       <property name="title">
        <string>Duyurular</string>
@@ -226,7 +152,104 @@
       </layout>
      </widget>
     </item>
-    <item row="6" column="1">
+    <item row="6" column="0" rowspan="2">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Duyuru Paylaş</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>&amp;Başlık</string>
+         </property>
+         <property name="buddy">
+          <cstring>leDuyuruBaslik</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="leDuyuruBaslik"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>&amp;Metin</string>
+         </property>
+         <property name="buddy">
+          <cstring>teDuyuruMetin</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTextEdit" name="teDuyuruMetin"/>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="BtnDuyuru">
+         <property name="text">
+          <string>Paylaş</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Aktif ID</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="leAktifID">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnDoktor">
+        <property name="text">
+         <string>&amp;DOKTOR İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnHasta">
+        <property name="text">
+         <string>&amp;HASTA İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnIlac">
+        <property name="text">
+         <string>&amp;İLAÇ İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="BtnTetkik">
+        <property name="text">
+         <string>&amp;TETKİK İŞLEMLERİ</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="7" column="1">
      <widget class="QPushButton" name="BtnYedekle">
       <property name="text">
        <string>&amp;Yedekle/Dışa Aktar</string>
