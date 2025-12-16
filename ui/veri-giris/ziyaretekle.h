@@ -13,7 +13,7 @@ class ZiyaretEkle : public QDialog
     Q_OBJECT
 
 public:
-    explicit ZiyaretEkle(QWidget *parent = nullptr);
+    explicit ZiyaretEkle(quint32 kid, QWidget *parent = nullptr);
     ~ZiyaretEkle();
 
     ZiyaretTablosu::VeriPointer getVeri() const;
@@ -24,6 +24,6 @@ public:
 
 private:
     Ui::ZiyaretEkle *ui;
-
     ZiyaretTablosu::VeriPointer veri;
+    quint32 m_kid;
 };

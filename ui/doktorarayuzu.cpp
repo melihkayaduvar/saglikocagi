@@ -1,7 +1,10 @@
 #include "doktorarayuzu.h"
 #include "ui/ui_doktorarayuzu.h"
 #include "../Veri/veritabani.h"
+#include "veri-giris/ziyaretekle.h"
 #include "veri-liste/dkhastaliste.h"
+#include "veri-liste/ziyaretliste.h"
+#include <QMessageBox>
 
 doktorarayuzu::doktorarayuzu(quint32 dokid,QWidget *parent)
     : QMainWindow(parent)
@@ -50,7 +53,26 @@ void doktorarayuzu::on_btnHastalar_clicked()
 
 void doktorarayuzu::on_btnZiyaret_clicked()
 {
+    ziyaretliste frm(-1,this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
+    frm.exec();
+}
 
+
+void doktorarayuzu::on_btnZiyaretOlustur_clicked()
+{
+    ZiyaretEkle frm(m_doktorID,this);
+    auto ziyaret = VERITABANI::vt().ziyaretler().olustur();
+    frm.setVeri(ziyaret);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
+    auto cevap = frm.exec();
+    if(cevap==QDialog::Accepted){
+        ziyaret=frm.getVeri();
+        VERITABANI::vt().ziyaretler().ekle(ziyaret);
+        QMessageBox::information(this,
+                                 tr("Bilgilendirme"),
+                                 tr("%1 tarihli ziyaret eklendi.").arg(ziyaret->tarihsaat().toString()));
+    }
 }
 
 
@@ -61,4 +83,3 @@ void doktorarayuzu::on_actCikis_triggered()
     emit oturumKapatildi();
     this->close();
 }
-

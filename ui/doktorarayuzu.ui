@@ -14,7 +14,32 @@
    <string>Doktor Arayüzü</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnZiyaret">
+        <property name="text">
+         <string>Ziyaretler</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnZiyaretOlustur">
+        <property name="text">
+         <string>Yeni Ziyaret Oluştur</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QPushButton" name="btnHastalar">
+        <property name="text">
+         <string>Hastalarım</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item row="0" column="1" rowspan="2">
      <spacer name="verticalSpacer">
       <property name="orientation">
@@ -43,24 +68,6 @@
        </size>
       </property>
      </spacer>
-    </item>
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="btnHastalar">
-        <property name="text">
-         <string>Hastalarım</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnZiyaret">
-        <property name="text">
-         <string>Yeni Ziyaret Oluştur</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>

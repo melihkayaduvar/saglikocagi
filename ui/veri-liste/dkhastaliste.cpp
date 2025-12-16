@@ -1,8 +1,8 @@
 #include "dkhastaliste.h"
 #include "ui/veri-liste/ui_dkhastaliste.h"
 #include "../veri-bilgi/hastabilgi.h"
-
 #include "../../Veri/veritabani.h"
+#include "ziyaretliste.h"
 #include <qmessagebox.h>
 dkHastaListe::dkHastaListe(QWidget *parent)
     : QDialog(parent)
@@ -15,6 +15,7 @@ dkHastaListe::dkHastaListe(QWidget *parent)
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged ,this, &dkHastaListe::tablewidget_silmesecimi);
     connect(ui->btnBilgi, &QPushButton::clicked, this, &dkHastaListe::bilgiTiklandi);
+    connect(ui->btnZiyaret, &QPushButton::clicked, this, &dkHastaListe::ziyaretTiklandi);
 
 }
 
@@ -42,6 +43,30 @@ void dkHastaListe::bilgiTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     HastaBilgi frm(id,this);
+    frm.exec();
+
+    tabloguncelle();
+}
+
+void dkHastaListe::ziyaretTiklandi()
+{
+    auto selectedRanges = ui->tableWidget->selectedRanges();
+    QSet<int> selectedRows;
+    for (auto &range : selectedRanges) {
+        for (int row = range.topRow(); row <= range.bottomRow(); ++row) {
+            selectedRows.insert(row);
+        }
+    }
+    if (selectedRows.size() > 1) {
+        QMessageBox::warning(this, tr("Uyarı"), tr("Lütfen sadece bir satır seçiniz."));
+        return;
+    }
+    auto secili = ui->tableWidget->selectedItems();
+
+    int row = secili.first()->row();
+    quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
+
+    ziyaretliste frm(id,this);
     frm.exec();
 
     tabloguncelle();
@@ -153,4 +178,6 @@ void dkHastaListe::tablewidget_silmesecimi()
 {
     bool secimvarmi = !ui->tableWidget->selectedItems().isEmpty();
     ui->btnBilgi->setEnabled(secimvarmi);
+    ui->btnZiyaret->setEnabled(secimvarmi);
 }
+

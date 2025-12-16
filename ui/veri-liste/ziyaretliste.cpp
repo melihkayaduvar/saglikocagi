@@ -4,9 +4,10 @@
 #include "../../Veri/veritabani.h"
 #include <qmessagebox.h>
 
-ziyaretliste::ziyaretliste(QWidget *parent)
+ziyaretliste::ziyaretliste(quint32 kid, QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::ziyaretliste)
+    , ui(new Ui::ziyaretliste),
+    m_kid(kid)
 {
     ui->setupUi(this);
 
@@ -24,18 +25,36 @@ ziyaretliste::~ziyaretliste()
 void ziyaretliste::ara()
 {
     liste.clear();
-    if(ui->leAra->text().trimmed().isEmpty()){
-        liste = VERITABANI::vt().ziyaretler().tumu();
-    }else {
-        liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
-            auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(d->doktorid());
-            auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(d->hastaid());
-            return QString::number(d->id()).contains(ui->leAra->text())||
-                doktor->adi().toLower().contains(ui->leAra->text().toLower())||
-                doktor->soyadi().toLower().contains(ui->leAra->text().toLower())||
-                hasta->adi().toLower().contains(ui->leAra->text().toLower())||
-                hasta->soyadi().toLower().contains(ui->leAra->text().toLower());
-        });
+    if(m_kid==-1){
+        if(ui->leAra->text().trimmed().isEmpty()){
+            liste = VERITABANI::vt().ziyaretler().tumu();
+        }else{
+            liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
+                auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(d->doktorid());
+                auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(d->hastaid());
+                return QString::number(d->id()).contains(ui->leAra->text())||
+                                                doktor->adi().toLower().contains(ui->leAra->text().toLower())||
+                                                doktor->soyadi().toLower().contains(ui->leAra->text().toLower())||
+                                                hasta->adi().toLower().contains(ui->leAra->text().toLower())||
+                                                hasta->soyadi().toLower().contains(ui->leAra->text().toLower());
+            });
+        }
+    }else{
+        if(ui->leAra->text().trimmed().isEmpty()){
+            liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
+                return d->hastaid()==m_kid;
+            });
+        }else{
+            liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
+                auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(d->doktorid());
+                auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(d->hastaid());
+                return hasta->id()==m_kid&&(QString::number(d->id()).contains(ui->leAra->text())||
+                       doktor->adi().toLower().contains(ui->leAra->text().toLower())||
+                       doktor->soyadi().toLower().contains(ui->leAra->text().toLower())||
+                       hasta->adi().toLower().contains(ui->leAra->text().toLower())||
+                       hasta->soyadi().toLower().contains(ui->leAra->text().toLower()));
+            });
+        }
     }
     tabloguncelle();
 }
@@ -84,9 +103,9 @@ void ziyaretliste::tabloguncelle()
 void ziyaretliste::tablewidget_silmesecimi()
 {
     bool secimVarMi = !ui->tableWidget->selectedItems().isEmpty();
-    ui->btnSil->setEnabled(secimVarMi);
+    //ui->btnSil->setEnabled(secimVarMi);
 }
-void ziyaretliste::on_btnSil_clicked()
+/*void ziyaretliste::on_btnSil_clicked()
 {
     auto selectedRanges = ui->tableWidget->selectedRanges();
     QSet<int> selectedRows;
@@ -127,10 +146,9 @@ void ziyaretliste::on_btnSil_clicked()
             }
         }
     }
-}
+}*/
 
 void ziyaretliste::on_leAra_textChanged(const QString &arg1)
 {
     ara();
 }
-

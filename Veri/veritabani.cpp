@@ -30,10 +30,10 @@ void VERITABANI::baglan()
     }
 }
 
-// TABLOLAR İÇİN EKLEME VE SİLME KURALLARI (SQL INSERT/DELETE)
+
 void VERITABANI::sqlAyarlariniYap()
 {
-    // --- DOKTORLAR ---
+
     tblDoktor.setSqlEklemeIslemi([this](DoktorTablosu::VeriPointer d){
         QSqlQuery q;
         q.prepare("INSERT INTO doktorlar (ad, soyad, telefon, diploma_no, uzmanlik) VALUES (?, ?, ?, ?, ?)");
@@ -43,7 +43,7 @@ void VERITABANI::sqlAyarlariniYap()
         q.addBindValue(d->diplomaNo());
         q.addBindValue(d->uzmanlikAlani());
         if(q.exec()){
-            d->setId(q.lastInsertId().toInt()); // SQL'den gelen ID'yi nesneye ata
+            d->setId(q.lastInsertId().toInt());
         } else { qDebug() << "Doktor Ekleme Hatası:" << q.lastError().text(); }
     });
 
@@ -60,21 +60,20 @@ void VERITABANI::sqlAyarlariniYap()
         q.addBindValue(d->telefon());
         q.addBindValue(d->diplomaNo());
         q.addBindValue(d->uzmanlikAlani());
-        q.addBindValue(d->id()); // WHERE koşulu için ID en sonda
+        q.addBindValue(d->id());
         if(!q.exec()) qDebug() << "Doktor Güncelleme Hatası:" << q.lastError().text();
     });
 
     // --- HASTALAR ---
     tblHasta.setSqlEklemeIslemi([this](HastaTablosu::VeriPointer h){
         QSqlQuery q;
-        // Not: StringList olan alerjiler ve kronik hastalıkları join ile birleştirip kaydediyoruz
-        q.prepare("INSERT INTO hastalar (tc_no, ad, soyad, telefon, dogum_tarihi, cinsiyet, adres, kan_grubu) VALUES (?,?,?,?,?,?,?,?,)");
+        q.prepare("INSERT INTO hastalar (tc_no, ad, soyad, telefon, dogum_tarihi, cinsiyet, adres, kan_grubu) VALUES (?,?,?,?,?,?,?,?)");
         q.addBindValue(h->tckimlik());
         q.addBindValue(h->adi());
         q.addBindValue(h->soyadi());
         q.addBindValue(h->telefon());
         q.addBindValue(h->dogumTarihi());
-        q.addBindValue(static_cast<int>(h->cinsiyet())); // Enum int olarak kaydedilir
+        q.addBindValue(static_cast<int>(h->cinsiyet()));
         q.addBindValue(h->adres());
         q.addBindValue(h->kanGrubu());
 
@@ -490,8 +489,8 @@ void VERITABANI::ilkYukleme()
         z->setId(qZiyaret.value("id").toInt());
         z->setTarihsaat(qZiyaret.value("tarihsaat").toDateTime());
         z->setSikayet(qZiyaret.value("sikayet").toString());
-        z->setTani(qZiyaret.value("ziyaret").toString());
-        z->setTedavinotlari(qZiyaret.value("tedavinot").toString());
+        z->setTani(qZiyaret.value("tani").toString());
+        z->setTedavinotlari(qZiyaret.value("tedavinotlari").toString());
         z->setDoktorId(qZiyaret.value("doktorid").toInt());
         z->setHastaId(qZiyaret.value("hastaid").toInt());
 

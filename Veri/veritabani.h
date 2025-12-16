@@ -6,7 +6,6 @@
 #include <QSqlError>
 #include <QDebug>
 
-//Tekil Tasarım şablonu uygulama
 class VERITABANI
 {
 private:
@@ -29,10 +28,10 @@ public:
 
     DuyuruTablosu& duyurular();
 
-    // SQL İşlemleri
-    void baglan();          // SQL Server'a bağlanır
-    void sqlAyarlariniYap(); // Tabloların INSERT/DELETE kurallarını tanımlar
-    void ilkYukleme();       // Program açılınca verileri RAM'e çeker
+
+    void baglan();
+    void sqlAyarlariniYap();
+    void ilkYukleme();
 
     quint32 aktifkid() const;
     void setAktifkid(quint32 newAktifkid);

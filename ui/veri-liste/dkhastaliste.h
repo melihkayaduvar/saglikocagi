@@ -22,9 +22,11 @@ public:
     void tablewidget_silmesecimi();
     void duzenleTiklandi();
     void bilgiTiklandi();
+    void ziyaretTiklandi();
     void close();
 private slots:
     void on_leAra_textChanged(const QString &arg1);
+
 private:
     Ui::dkHastaListe *ui;
     HastaTablosu::VeriDizisi liste;

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dkHastaBilgi</class>
+ <widget class="QDialog" name="dkHastaBilgi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>713</width>
+    <height>539</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblAdi">
+       <property name="text">
+        <string>&amp;Adı</string>
+       </property>
+       <property name="buddy">
+        <cstring>leAdi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leAdi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblSoyadi">
+       <property name="text">
+        <string>&amp;Soyadı</string>
+       </property>
+       <property name="buddy">
+        <cstring>leSoyadi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="leSoyadi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblCinsiyet">
+       <property name="text">
+        <string>&amp;Cinsiyet</string>
+       </property>
+       <property name="buddy">
+        <cstring>leCinsiyet</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblDogumTarihi">
+       <property name="text">
+        <string>&amp;Doğum Tarihi</string>
+       </property>
+       <property name="buddy">
+        <cstring>deDogumTarihi</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDateEdit" name="deDogumTarihi">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblKimlikNo">
+       <property name="text">
+        <string>&amp;Kimlik No</string>
+       </property>
+       <property name="buddy">
+        <cstring>leKimlikNo</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="leKimlikNo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="inputMask">
+        <string>00000000000;_</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="leCinsiyet">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1" rowspan="2">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblKronikHastaliklar">
+       <property name="text">
+        <string>&amp;Kronik Hastalıklar</string>
+       </property>
+       <property name="buddy">
+        <cstring>lwKronikHastaliklar</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="3">
+      <widget class="QListWidget" name="lwKronikHastaliklar"/>
+     </item>
+     <item row="2" column="0" colspan="3">
+      <widget class="QListWidget" name="lwAlerjiler"/>
+     </item>
+     <item row="3" column="2">
+      <layout class="QFormLayout" name="formLayout_3"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblAlerjiler">
+       <property name="text">
+        <string>&amp;Alerjiler</string>
+       </property>
+       <property name="buddy">
+        <cstring>lwAlerjiler</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblKanGrubu">
+       <property name="text">
+        <string>&amp;Kan Grubu</string>
+       </property>
+       <property name="buddy">
+        <cstring>leKanGrubu</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leKanGrubu">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="2">
+      <layout class="QFormLayout" name="formLayout_4"/>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblTel">
+       <property name="text">
+        <string>&amp;Telefon No     </string>
+       </property>
+       <property name="buddy">
+        <cstring>leTel</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="leTel">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="inputMask">
+        <string>(5##) ### ####;_</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblAdres">
+       <property name="text">
+        <string>&amp;Adres</string>
+       </property>
+       <property name="buddy">
+        <cstring>teAdres</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QTextEdit" name="teAdres">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="btnDuzenle">
+     <property name="text">
+      <string>Düzenle</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="btnCik">
+     <property name="text">
+      <string>Çık</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnCik</sender>
+   <signal>clicked()</signal>
+   <receiver>dkHastaBilgi</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>703</x>
+     <y>529</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>483</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

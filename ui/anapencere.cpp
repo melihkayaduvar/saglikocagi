@@ -125,7 +125,7 @@ void anapencere::on_actionhastalist_triggered()
 //Ziyaret
 void anapencere::on_actionziyaretekle_triggered()
 {
-    ZiyaretEkle ziyareteklefrm;
+    ZiyaretEkle ziyareteklefrm(-1);
     auto ziyaret = VERITABANI::vt().ziyaretler().olustur();
     ziyareteklefrm.setVeri(ziyaret);
 
@@ -142,7 +142,7 @@ void anapencere::on_actionziyaretekle_triggered()
 
 void anapencere::on_actionziyaretlist_triggered()
 {
-    ziyaretliste ziyaretlistfrm;
+    ziyaretliste ziyaretlistfrm(-1);
     ziyaretlistfrm.exec();
 }
 

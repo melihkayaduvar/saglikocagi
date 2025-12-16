@@ -5,9 +5,10 @@
 
 #include "../../Veri/veritabani.h"
 
-ZiyaretEkle::ZiyaretEkle(QWidget *parent)
+ZiyaretEkle::ZiyaretEkle(quint32 kid,QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::ZiyaretEkle)
+    , ui(new Ui::ZiyaretEkle),
+    m_kid(kid)
 {
     ui->setupUi(this);
 
@@ -24,10 +25,9 @@ ZiyaretEkle::~ZiyaretEkle()
 
 ZiyaretTablosu::VeriPointer ZiyaretEkle::getVeri() const
 {
-    QString docid =ui->doctorComboBox->currentText().section("ID: ", 1).section(" ",0,0);
     QString hastid =ui->hastaComboBox->currentText().section("ID: ", 1).section(" ",0,0);
 
-    veri->setDoktorId(docid.toUInt());
+    veri->setDoktorId(m_kid);
     veri->setHastaId(hastid.toUInt());
     veri->setSikayet(ui->teSikayet->toPlainText());
     veri->setTani(ui->teTani->toPlainText());
@@ -49,19 +49,16 @@ void ZiyaretEkle::setVeri(const ZiyaretTablosu::VeriPointer &newVeri)
 
 void ZiyaretEkle::DoktorComboBoxVeri()
 {
-    auto tumdoktorlar=VERITABANI::vt().doktorlar().tumu();
+    auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(m_kid);
     ui->doctorComboBox->clear();
 
-    for (auto &doctor : tumdoktorlar) {
-        QString a;
-        a.append("ID: ");
-        a.append(QString::number(doctor->id())+" , ");
-        a.append("Doktor: "+doctor->adi()+" ");
-        a.append(doctor->soyadi()+" , ");
-        a.append("Uzm. Alanı: "+doctor->uzmanlikAlani());
-
-        ui->doctorComboBox->addItem(a);
-    }
+    QString a;
+    a.append("ID: ");
+    a.append(QString::number(doktor->id())+" , ");
+    a.append("Doktor: "+doktor->adi()+" ");
+    a.append(doktor->soyadi()+" , ");
+    a.append("Uzm. Alanı: "+doktor->uzmanlikAlani());
+    ui->doctorComboBox->addItem(a);
 }
 
 void ZiyaretEkle::HastaComboBoxVeri()

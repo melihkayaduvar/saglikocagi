@@ -23,6 +23,8 @@ private slots:
 
     void on_actCikis_triggered();
 
+    void on_btnZiyaretOlustur_clicked();
+
 private:
     Ui::doktorarayuzu *ui;
     quint32 m_doktorID;
