@@ -12,7 +12,7 @@ class receteekle : public QDialog
     Q_OBJECT
 
 public:
-    explicit receteekle(QWidget *parent = nullptr);
+    explicit receteekle(quint32 kid, QWidget *parent = nullptr);
     ~receteekle();
 
     ReceteTablosu::VeriPointer getVeri() const;
@@ -31,4 +31,5 @@ private:
     Ui::receteekle *ui;
 
     ReceteTablosu::VeriPointer veri;
+    quint32 m_kid;
 };

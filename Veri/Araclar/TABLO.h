@@ -16,10 +16,10 @@ public:
     using SqlEklemeFonksiyonu = std::function<void(VeriPointer)>;
     using SqlSilmeFonksiyonu = std::function<void(quint32)>;
     using SqlGuncellemeFonksiyonu = std::function<void(VeriPointer)>;
+
     VeriPointer olustur(){
         return VeriPointer(new VeriSinifi);
     }
-
 
     void ekle(VeriPointer yeni_nesne){
 
@@ -30,6 +30,15 @@ public:
         }
         this->_elemanlar.append(yeni_nesne);
     }
+
+    void ramEkle(VeriPointer nesne) {
+        this->_elemanlar.append(nesne);
+        if(nesne->id() >= _sonid) _sonid = nesne->id() + 1;
+    }
+
+    void setSqlEklemeIslemi(SqlEklemeFonksiyonu func) { _sqlEklemeIslemi = func; }
+    void setSqlSilmeIslemi(SqlSilmeFonksiyonu func) { _sqlSilmeIslemi = func; }
+    void setSqlGuncellemeIslemi(SqlGuncellemeFonksiyonu func) { _sqlGuncellemeIslemi = func; }
 
     bool IdyeGoreSil(quint32 id){
         for (quint32 i=0;i<_elemanlar.size();i++) {
@@ -42,14 +51,6 @@ public:
             }
         }
         return false;
-    }
-
-    void setSqlEklemeIslemi(SqlEklemeFonksiyonu func) { _sqlEklemeIslemi = func; }
-    void setSqlSilmeIslemi(SqlSilmeFonksiyonu func) { _sqlSilmeIslemi = func; }
-
-    void ramEkle(VeriPointer nesne) {
-        this->_elemanlar.append(nesne);
-        if(nesne->id() >= _sonid) _sonid = nesne->id() + 1;
     }
 
     VeriPointer IdyeGoreAra(quint32 id){
@@ -90,11 +91,13 @@ public:
         }
         return aramaSonucu;
     }
+
     VeriDizisi tumu(){
         return bul([](VeriPointer d){
             return true;
         });
     }
+
     bool duzenle(quint32 id, std::function<void(VeriPointer&)> duzenlemeIslemi) {
         try {
             VeriPointer nesne = IdyeGoreAra(id);
@@ -109,8 +112,6 @@ public:
         }
     }
 
-
-    void setSqlGuncellemeIslemi(SqlGuncellemeFonksiyonu func) { _sqlGuncellemeIslemi = func; }
     quint32 boyut(){
         return _elemanlar.size();
     }

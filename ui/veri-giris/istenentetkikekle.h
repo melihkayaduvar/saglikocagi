@@ -13,7 +13,7 @@ class IstenenTetkikEkle : public QDialog
     Q_OBJECT
 
 public:
-    explicit IstenenTetkikEkle(QWidget *parent = nullptr);
+    explicit IstenenTetkikEkle(quint32 kid, QWidget *parent = nullptr);
     ~IstenenTetkikEkle();
 
     IstenenTetkikTablosu::VeriPointer getVeri() const;
@@ -32,5 +32,6 @@ private:
     Ui::IstenenTetkikEkle *ui;
 
     IstenenTetkikTablosu::VeriPointer veri;
+    quint32 m_kid;
 
 };

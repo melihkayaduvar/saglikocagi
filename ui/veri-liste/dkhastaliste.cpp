@@ -91,7 +91,7 @@ void dkHastaListe::ara(){
 void dkHastaListe::tabloguncelle()
 {
     ui->tableWidget->setRowCount(liste.count());
-    ui->tableWidget->setColumnCount(12);
+    ui->tableWidget->setColumnCount(11);
     QStringList basliklar;
     basliklar.append("ID");
     basliklar.append("ADI");
@@ -104,7 +104,6 @@ void dkHastaListe::tabloguncelle()
     basliklar.append("KAN GRUBU");
     basliklar.append("ALERJILER");
     basliklar.append("KRONIK HASTALIKLAR");
-    basliklar.append("ZIYARETLER");
 
     ui->tableWidget->setHorizontalHeaderLabels(basliklar);
 
@@ -113,12 +112,6 @@ void dkHastaListe::tabloguncelle()
         auto ziyaretler=VERITABANI::vt().ziyaretler().bul([id](ZiyaretTablosu::VeriPointer ziyaret){
             return ziyaret->hastaid() == id;
         });
-
-        QStringList idler;
-        for(auto i=0;i<ziyaretler.size();i++){
-            idler.append(QString::number(ziyaretler[i]->id()));
-        }
-        QString idler_n=idler.join(", ");
 
         QTableWidgetItem *hucre0 = new QTableWidgetItem;
         hucre0->setText(tr("%1").arg(liste[i]->id()));
@@ -164,9 +157,6 @@ void dkHastaListe::tabloguncelle()
         QTableWidgetItem *hucre10=new QTableWidgetItem;
         hucre10->setText(liste[i]->kronikHastaliklar().join(", "));
         ui->tableWidget->setItem(i,10,hucre10);
-        QTableWidgetItem *hucre11=new QTableWidgetItem;
-        hucre11->setText(idler_n);
-        ui->tableWidget->setItem(i,11,hucre11);
     }
 }
 void dkHastaListe::on_leAra_textChanged(const QString &arg1)

@@ -149,7 +149,7 @@ void anapencere::on_actionziyaretlist_triggered()
 //İstenen Tetkik
 void anapencere::on_actionistetnentetkikekle_triggered()
 {
-    IstenenTetkikEkle istenentetkikfrm;
+    IstenenTetkikEkle istenentetkikfrm(-1);
     //istenentetkikfrm.exec();
     auto istenentetkik =VERITABANI::vt().istenentetkikler().olustur();
     istenentetkikfrm.setVeri(istenentetkik);
@@ -174,7 +174,7 @@ void anapencere::on_actionistenentetkiklist_triggered()
 //Recete
 void anapencere::on_actionreceteekle_triggered()
 {
-    receteekle recetefrm;
+    receteekle recetefrm(-1);
     auto recete=VERITABANI::vt().receteler().olustur();
     recetefrm.setVeri(recete);
     auto cevap=recetefrm.exec();

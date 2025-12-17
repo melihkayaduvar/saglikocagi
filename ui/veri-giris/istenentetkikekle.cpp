@@ -5,9 +5,10 @@
 
 #include <QMessageBox>
 
-IstenenTetkikEkle::IstenenTetkikEkle(QWidget *parent)
+IstenenTetkikEkle::IstenenTetkikEkle(quint32 kid,QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::IstenenTetkikEkle)
+    , ui(new Ui::IstenenTetkikEkle),
+    m_kid(kid)
 {
     ui->setupUi(this);
     tabloguncelle();
@@ -25,14 +26,14 @@ IstenenTetkikEkle::~IstenenTetkikEkle()
 
 IstenenTetkikTablosu::VeriPointer IstenenTetkikEkle::getVeri() const
 {
-    QString ziyaretid =ui->cbZiyaretler->currentText().section("ID: ", 1).section(" ",0,0);
-    veri->setZiyaretId(ziyaretid.toUInt());
+    quint32 ziyaretid =m_kid;
+    veri->setZiyaretId(ziyaretid);
     for (int i = 0; i < ui->listWidget->count(); ++i) {
         QListWidgetItem *item = ui->listWidget->item(i);
         if (item->checkState() == Qt::Checked) {
             int tetkikId = item->data(Qt::UserRole).toInt();
             veri->setTetkikId(tetkikId);
-            break; // sadece bir tanesi seçilebiliyorsa
+            break;
         }
     }
     veri->setIstekTarihi(ui->dteIstekTarihi->dateTime());
@@ -74,7 +75,6 @@ void IstenenTetkikEkle::tabloguncelle()
 void IstenenTetkikEkle::onItemChanged(QListWidgetItem *changedItem)
 {
     if (changedItem->checkState() == Qt::Checked) {
-        // Diğer tüm öğeleri pasif hale getir
         for (int i = 0; i < ui->listWidget->count(); ++i) {
             QListWidgetItem *item = ui->listWidget->item(i);
             if (item != changedItem && item->checkState() == Qt::Checked) {
@@ -86,27 +86,24 @@ void IstenenTetkikEkle::onItemChanged(QListWidgetItem *changedItem)
 
 void IstenenTetkikEkle::ziyaretcomboboxveri()
 {
-    auto tumziyaretler=VERITABANI::vt().ziyaretler().tumu();
+    auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(m_kid);
     ui->cbZiyaretler->clear();
 
-    for (auto &ziyaret : tumziyaretler) {
-        QString a;
-        a.append("ID: ");
-        a.append(QString::number(ziyaret->id())+" , ");
-        auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(ziyaret->hastaid());
-        auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(ziyaret->doktorid());
-        a.append(hasta->adi()+" ");
-        a.append(hasta->soyadi()+", ");
-        a.append("Doktor:"+doktor->adi()+" "+doktor->soyadi()+", ");
-        a.append("Tanı:"+ziyaret->tani()+", ");
-        a.append(ziyaret->tarihsaat().toString());
+    QString a;
+    a.append("ID: ");
+    a.append(QString::number(ziyaret->id())+" , ");
+    auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(ziyaret->hastaid());
+    auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(ziyaret->doktorid());
+    a.append(hasta->adi()+" ");
+    a.append(hasta->soyadi()+", ");
+    a.append("Doktor:"+doktor->adi()+" "+doktor->soyadi()+", ");
+    a.append("Tanı:"+ziyaret->tani()+", ");
+    a.append(ziyaret->tarihsaat().toString());
 
-        ui->cbZiyaretler->addItem(a);
-    }
+    ui->cbZiyaretler->addItem(a);
 }
 void IstenenTetkikEkle::accept()
 {
-    // En az bir tetkik seçili mi kontrol et
     bool seciliVar = false;
     for (int i = 0; i < ui->listWidget->count(); ++i) {
         QListWidgetItem *item = ui->listWidget->item(i);
@@ -118,10 +115,8 @@ void IstenenTetkikEkle::accept()
 
     if (!seciliVar) {
         QMessageBox::warning(this, "Uyarı", "Lütfen bir tetkik seçin!");
-        return; // Dialog'u kapatma
+        return;
     }
-
-    // Eğer seçili varsa normal şekilde dialog'u kapat
     QDialog::accept();
 }
 

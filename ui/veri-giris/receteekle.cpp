@@ -2,9 +2,10 @@
 #include "ui_receteekle.h"
 #include "../../Veri/veritabani.h"
 
-receteekle::receteekle(QWidget *parent)
+receteekle::receteekle(quint32 kid,QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::receteekle)
+    , ui(new Ui::receteekle),
+    m_kid(kid)
 {
     ui->setupUi(this);
     cbZiyaret_guncelle();
@@ -12,7 +13,6 @@ receteekle::receteekle(QWidget *parent)
     ui->deReceteTarihi->setDate(QDate::currentDate());
     connect(ui->lwReceteKalemleri,&QListWidget::itemSelectionChanged, this, &receteekle::lwReceteKalemleri_silmesecimi);
     ui->lwReceteKalemleri->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
 }
 
 receteekle::~receteekle()
@@ -25,8 +25,8 @@ ReceteTablosu::VeriPointer receteekle::getVeri() const
     //recete
     veri->setGecerlilikSuresi(ui->leGecerlilikSuresi->text().toUInt());
     veri->setTarih(ui->deReceteTarihi->date());
-    QString ziyaretid =ui->cbZiyaretler->currentText().section("ID: ", 1).section(" ",0,0);
-    veri->setZiyaretId(ziyaretid.toUInt());
+    quint32 ziyaretid =m_kid;
+    veri->setZiyaretId(ziyaretid);
     //recete kalemi
     for(auto i=0;i<ui->lwReceteKalemleri->count();i++){
         auto kalem=VERITABANI::vt().recetekalemleri().olustur();
@@ -88,24 +88,21 @@ void receteekle::lwReceteKalemleri_silmesecimi(){
 
 void receteekle::cbZiyaret_guncelle()
 {
-    auto tumziyaretler=VERITABANI::vt().ziyaretler().tumu();
+    auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(m_kid);
     ui->cbZiyaretler->clear();
 
-    for (auto &ziyaret : tumziyaretler) {
-        QString a;
-        a.append("ID: ");
-        a.append(QString::number(ziyaret->id())+" , ");
-        auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(ziyaret->hastaid());
-        auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(ziyaret->doktorid());
-        a.append(hasta->adi()+" ");
-        a.append(hasta->soyadi()+", ");
-        a.append("Doktor:"+doktor->adi()+" "+doktor->soyadi()+", ");
-        a.append("Tanı:"+ziyaret->tani()+", ");
-        a.append(ziyaret->tarihsaat().toString());
+    QString a;
+    a.append("ID: ");
+    a.append(QString::number(ziyaret->id())+" , ");
+    auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(ziyaret->hastaid());
+    auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(ziyaret->doktorid());
+    a.append(hasta->adi()+" ");
+    a.append(hasta->soyadi()+", ");
+    a.append("Doktor:"+doktor->adi()+" "+doktor->soyadi()+", ");
+    a.append("Tanı:"+ziyaret->tani()+", ");
+    a.append(ziyaret->tarihsaat().toString());
 
-        ui->cbZiyaretler->addItem(a);
-    }
-
+    ui->cbZiyaretler->addItem(a);
 }
 
 void receteekle::cbIlac_guncelle()

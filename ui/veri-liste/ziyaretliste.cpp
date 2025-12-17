@@ -3,6 +3,8 @@
 
 #include "../../Veri/veritabani.h"
 #include <qmessagebox.h>
+#include "../veri-giris/receteekle.h"
+#include "../veri-giris//istenentetkikekle.h"
 
 ziyaretliste::ziyaretliste(quint32 kid, QWidget *parent)
     : QDialog(parent)
@@ -15,6 +17,8 @@ ziyaretliste::ziyaretliste(quint32 kid, QWidget *parent)
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged ,this, &ziyaretliste::tablewidget_silmesecimi);
+    connect(ui->btnReceteOlustur, &QPushButton::clicked,this,&ziyaretliste::receteolustur);
+    connect(ui->btnTetkikIste, &QPushButton::clicked,this,&ziyaretliste::tetkikiste);
 }
 
 ziyaretliste::~ziyaretliste()
@@ -103,7 +107,49 @@ void ziyaretliste::tabloguncelle()
 void ziyaretliste::tablewidget_silmesecimi()
 {
     bool secimVarMi = !ui->tableWidget->selectedItems().isEmpty();
+    ui->btnReceteOlustur->setEnabled(secimVarMi);
+    ui->btnTetkikIste->setEnabled(secimVarMi);
     //ui->btnSil->setEnabled(secimVarMi);
+}
+
+void ziyaretliste::receteolustur()
+{
+    auto selectedRanges = ui->tableWidget->selectedRanges();
+    QSet<int> selectedRows;
+    for (auto &range : selectedRanges) {
+        for (int row = range.topRow(); row <= range.bottomRow(); ++row) {
+            selectedRows.insert(row);
+        }
+    }
+    if (selectedRows.size() > 1) {
+        QMessageBox::warning(this, tr("Uyarı"), tr("Lütfen sadece bir satır seçiniz."));
+        return;
+    }
+    int satir = ui->tableWidget->currentRow();
+    auto id = ui->tableWidget->item(satir,0)->text().toUInt();
+    receteekle frm(id);
+    frm.setAttribute(Qt::WA_QuitOnClose,false);
+    frm.exec();
+}
+
+void ziyaretliste::tetkikiste()
+{
+    auto selectedRanges = ui->tableWidget->selectedRanges();
+    QSet<int> selectedRows;
+    for (auto &range : selectedRanges) {
+        for (int row = range.topRow(); row <= range.bottomRow(); ++row) {
+            selectedRows.insert(row);
+        }
+    }
+    if (selectedRows.size() > 1) {
+        QMessageBox::warning(this, tr("Uyarı"), tr("Lütfen sadece bir satır seçiniz."));
+        return;
+    }
+    int satir = ui->tableWidget->currentRow();
+    auto id = ui->tableWidget->item(satir,0)->text().toUInt();
+    IstenenTetkikEkle frm(m_kid);
+    frm.setAttribute(Qt::WA_QuitOnClose,false);
+    frm.exec();
 }
 /*void ziyaretliste::on_btnSil_clicked()
 {

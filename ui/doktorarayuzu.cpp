@@ -33,9 +33,9 @@ void doktorarayuzu::duyurulariYenile()
         QString tarih = d->tarih().toString("dd.MM.yyyy");
         QString html = QString(
                            "<div style='border-bottom: 1px solid #ccc; margin-bottom: 10px; padding-bottom: 5px;'>"
-                           "<b><font color='#2980b9' size='4'>%1</font></b>" // Başlık
-                           "&nbsp;&nbsp;<small style='color:gray;'>(%2)</small><br>" // Tarih
-                           "<span style='font-size: 14px;'>%3</span>" // İçerik
+                           "<b><font color='#2980b9' size='4'>%1</font></b>"
+                           "&nbsp;&nbsp;<small style='color:gray;'>(%2)</small><br>"
+                           "<span style='font-size: 14px;'>%3</span>"
                            "</div>"
                            ).arg(baslik, tarih, icerik);
         ui->tbDuyurular->append(html);

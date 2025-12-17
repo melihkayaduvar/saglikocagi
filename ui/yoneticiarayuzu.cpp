@@ -115,6 +115,7 @@ void yoneticiarayuzu::on_BtnDuyuru_clicked()
                     tr("%1").arg("'"+ui->leDuyuruBaslik->text()+"'"+"başlıklı duyuru başarı ile eklendi."));
     yoneticiarayuzu::duyurulariYenile();
 }
+
 void yoneticiarayuzu::duyurulariYenile()
 {
     ui->tbDuyurular->clear();
@@ -133,9 +134,7 @@ void yoneticiarayuzu::duyurulariYenile()
                            "&nbsp;&nbsp;<small style='color:gray;'>Islem Tarihi: %2 | <b>ID: #%4</b></small><br>"
                            "<span style='font-size: 14px; margin-top: 5px; display:block;'>%3</span>"
                            "</div>"
-                           ).arg(baslik)
-                           .arg(tarih)
-                           .arg(icerik)
+                           ).arg(baslik, tarih, icerik)
                            .arg(id);
         ui->tbDuyurular->append(html);
     }

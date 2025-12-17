@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QWidget>
-#include "../Veri/Araclar/TABLO_TANIMLARI.h"
 
 
 namespace Ui {

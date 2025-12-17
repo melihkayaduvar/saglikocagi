@@ -16,7 +16,6 @@ VERITABANI &VERITABANI::vt()
 void VERITABANI::baglan()
 {
     db = QSqlDatabase::addDatabase("QODBC");
-    // SSMS'teki sunucu adını buraya yaz (.\SQLEXPRESS veya localhost)
     QString serverName = "localhost\\SQLEXPRESS";
     QString dbName = "SaglikOcagiDB";
 
@@ -30,10 +29,8 @@ void VERITABANI::baglan()
     }
 }
 
-
 void VERITABANI::sqlAyarlariniYap()
 {
-
     tblDoktor.setSqlEklemeIslemi([this](DoktorTablosu::VeriPointer d){
         QSqlQuery q;
         q.prepare("INSERT INTO doktorlar (ad, soyad, telefon, diploma_no, uzmanlik) VALUES (?, ?, ?, ?, ?)");
@@ -64,7 +61,6 @@ void VERITABANI::sqlAyarlariniYap()
         if(!q.exec()) qDebug() << "Doktor Güncelleme Hatası:" << q.lastError().text();
     });
 
-    // --- HASTALAR ---
     tblHasta.setSqlEklemeIslemi([this](HastaTablosu::VeriPointer h){
         QSqlQuery q;
         q.prepare("INSERT INTO hastalar (tc_no, ad, soyad, telefon, dogum_tarihi, cinsiyet, adres, kan_grubu) VALUES (?,?,?,?,?,?,?,?)");
@@ -83,13 +79,13 @@ void VERITABANI::sqlAyarlariniYap()
 
             QSqlQuery qAlt;
             qAlt.prepare("INSERT INTO hasta_alerjiler (hasta_id, alerji_adi) VALUES (?,?)");
-            for(const QString &alerji:h->alerjiler()){
+            for(QString &alerji:h->alerjiler()){
                 qAlt.bindValue(0, yeniHastaid);
                 qAlt.bindValue(1, alerji);
                 qAlt.exec();
             }
             qAlt.prepare("INSERT INTO hasta_kronik_hastaliklar (hasta_id, hastalik_adi) VALUES (?,?)");
-            for(const QString &hastalik:h->kronikHastaliklar()){
+            for(QString &hastalik:h->kronikHastaliklar()){
                 qAlt.bindValue(0, yeniHastaid);
                 qAlt.bindValue(1, hastalik);
                 qAlt.exec();
@@ -103,6 +99,12 @@ void VERITABANI::sqlAyarlariniYap()
         q.prepare("DELETE FROM hasta_alerjiler WHERE hasta_id=?"); q.addBindValue(id); q.exec();
         q.prepare("DELETE FROM hasta_kronik_hastaliklar WHERE hasta_id=?"); q.addBindValue(id); q.exec();
         q.prepare("DELETE FROM hastalar WHERE id=?"); q.addBindValue(id); q.exec();
+        auto liste=VERITABANI::vt().ziyaretler().bul([&id](ZiyaretTablosu::VeriPointer d){
+            return d->hastaid()==id;
+        });
+        for(auto &i:liste){
+            VERITABANI::vt().ziyaretler().IdyeGoreSil(i->id());
+        }
     });
 
     tblHasta.setSqlGuncellemeIslemi([](HastaTablosu::VeriPointer h){
@@ -130,13 +132,13 @@ void VERITABANI::sqlAyarlariniYap()
         qSil.exec();
         QSqlQuery qEkle;
         qEkle.prepare("INSERT INTO hasta_alerjiler (hasta_id, alerji_adi) VALUES (?,?)");
-        for(const QString &alerji:h->alerjiler()){
+        for(QString &alerji:h->alerjiler()){
             qEkle.bindValue(0,h->id());
             qEkle.bindValue(1,alerji);
             qEkle.exec();
         }
         qEkle.prepare("INSERT INTO hasta_kronik_hastaliklar (hasta_id, hastalik_adi) VALUES (?,?)");
-        for(const QString &hastalik:h->kronikHastaliklar()){
+        for(QString &hastalik:h->kronikHastaliklar()){
             qEkle.bindValue(0,h->id());
             qEkle.bindValue(1,hastalik);
             qEkle.exec();
