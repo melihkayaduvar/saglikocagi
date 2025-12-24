@@ -93,10 +93,17 @@ void IstenenTetkikEkle::ziyaretcomboboxveri()
     a.append("ID: ");
     a.append(QString::number(ziyaret->id())+" , ");
     auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(ziyaret->hastaid());
-    auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(ziyaret->doktorid());
+    auto doktorlar = VERITABANI::vt().doktorlar().bul([&](DoktorTablosu::VeriPointer d){
+        return d->id()==ziyaret->doktorid();
+    });
     a.append(hasta->adi()+" ");
     a.append(hasta->soyadi()+", ");
-    a.append("Doktor:"+doktor->adi()+" "+doktor->soyadi()+", ");
+    if (!doktorlar.isEmpty()) {
+        auto doktor = doktorlar[0];
+        a.append("Doktor: "+doktor->adi()+" "+doktor->soyadi()+", ");
+    } else {
+        a.append("Doktor: Bilinmeyen Doktor, ");
+    }
     a.append("Tanı:"+ziyaret->tani()+", ");
     a.append(ziyaret->tarihsaat().toString());
 

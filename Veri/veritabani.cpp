@@ -99,10 +99,10 @@ void VERITABANI::sqlAyarlariniYap()
         q.prepare("DELETE FROM hasta_alerjiler WHERE hasta_id=?"); q.addBindValue(id); q.exec();
         q.prepare("DELETE FROM hasta_kronik_hastaliklar WHERE hasta_id=?"); q.addBindValue(id); q.exec();
         q.prepare("DELETE FROM hastalar WHERE id=?"); q.addBindValue(id); q.exec();
-        auto liste=VERITABANI::vt().ziyaretler().bul([&id](ZiyaretTablosu::VeriPointer d){
+        auto ziyaret=VERITABANI::vt().ziyaretler().bul([&id](ZiyaretTablosu::VeriPointer d){
             return d->hastaid()==id;
         });
-        for(auto &i:liste){
+        for(auto &i:ziyaret){
             VERITABANI::vt().ziyaretler().IdyeGoreSil(i->id());
         }
     });

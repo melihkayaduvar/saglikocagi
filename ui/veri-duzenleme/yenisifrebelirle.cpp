@@ -31,7 +31,7 @@ void yenisifrebelirle::accept()
             QMessageBox::warning(this, tr("Hata"), tr("Şifre kaydı bulunamadı."));
             return;
         }
-        VERITABANI::vt().doktorsifreleri().duzenle(veri_id,[this](LoginPassTablosu::VeriPointer d){
+        VERITABANI::vt().doktorsifreleri().duzenle(liste[0]->id(),[this](LoginPassTablosu::VeriPointer d){
             d->setSifre(ui->leYeniSifre->text());
         });
         QDialog::accept();

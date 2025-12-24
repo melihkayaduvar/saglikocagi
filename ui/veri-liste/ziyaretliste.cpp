@@ -34,8 +34,16 @@ void ziyaretliste::ara()
             liste = VERITABANI::vt().ziyaretler().tumu();
         }else{
             liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
-                auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(d->doktorid());
+                auto doktorlar = VERITABANI::vt().doktorlar().bul([&](DoktorTablosu::VeriPointer dk){
+                    return dk->id()==d->doktorid();
+                });
                 auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(d->hastaid());
+                if(doktorlar.isEmpty()) {
+                    return QString::number(d->id()).contains(ui->leAra->text())||
+                           hasta->adi().toLower().contains(ui->leAra->text().toLower())||
+                           hasta->soyadi().toLower().contains(ui->leAra->text().toLower());
+                }
+                auto doktor = doktorlar[0];
                 return QString::number(d->id()).contains(ui->leAra->text())||
                                                 doktor->adi().toLower().contains(ui->leAra->text().toLower())||
                                                 doktor->soyadi().toLower().contains(ui->leAra->text().toLower())||
@@ -50,8 +58,16 @@ void ziyaretliste::ara()
             });
         }else{
             liste = VERITABANI::vt().ziyaretler().bul([this](ZiyaretTablosu::VeriPointer d){
-                auto doktor=VERITABANI::vt().doktorlar().IdyeGoreAra(d->doktorid());
+                auto doktorlar = VERITABANI::vt().doktorlar().bul([&](DoktorTablosu::VeriPointer dk){
+                    return dk->id()==d->doktorid();
+                });
                 auto hasta=VERITABANI::vt().hastalar().IdyeGoreAra(d->hastaid());
+                if(doktorlar.isEmpty()) {
+                    return QString::number(d->id()).contains(ui->leAra->text())||
+                           hasta->adi().toLower().contains(ui->leAra->text().toLower())||
+                           hasta->soyadi().toLower().contains(ui->leAra->text().toLower());
+                }
+                auto doktor = doktorlar[0];
                 return hasta->id()==m_kid&&(QString::number(d->id()).contains(ui->leAra->text())||
                        doktor->adi().toLower().contains(ui->leAra->text().toLower())||
                        doktor->soyadi().toLower().contains(ui->leAra->text().toLower())||
@@ -95,8 +111,14 @@ void ziyaretliste::tabloguncelle()
         hucre4->setText(tr("%1").arg(liste[i]->tedavinotlari()));
         ui->tableWidget->setItem(i,4,hucre4);
         QTableWidgetItem *hucre5 = new QTableWidgetItem;
-        auto doktor = VERITABANI::vt().doktorlar().IdyeGoreAra(liste[i]->doktorid());
-        hucre5->setText(tr("%1").arg(doktor->adi()+" "+doktor->soyadi()));
+        auto doktor = VERITABANI::vt().doktorlar().bul([&](DoktorTablosu::VeriPointer d){
+            return d->id()==liste[i]->doktorid();
+        });
+        if (!doktor.isEmpty()) {
+            hucre5->setText(tr("%1").arg(doktor[0]->adi() + " " + doktor[0]->soyadi()));
+        } else {
+            hucre5->setText("Bilinmeyen Doktor");
+        }
         ui->tableWidget->setItem(i,5,hucre5);
         QTableWidgetItem *hucre6 = new QTableWidgetItem;
         auto hasta = VERITABANI::vt().hastalar().IdyeGoreAra(liste[i]->hastaid());
@@ -147,7 +169,7 @@ void ziyaretliste::tetkikiste()
     }
     int satir = ui->tableWidget->currentRow();
     auto id = ui->tableWidget->item(satir,0)->text().toUInt();
-    IstenenTetkikEkle frm(m_kid);
+    IstenenTetkikEkle frm(id);
     frm.setAttribute(Qt::WA_QuitOnClose,false);
     frm.exec();
 }

@@ -123,7 +123,10 @@
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>ID:</string>
+            <string>&amp;ID:</string>
+           </property>
+           <property name="buddy">
+            <cstring>leID</cstring>
            </property>
           </widget>
          </item>
@@ -136,7 +139,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>Sil</string>
+            <string>&amp;Sil</string>
            </property>
           </widget>
          </item>
@@ -145,7 +148,7 @@
        <item row="1" column="1">
         <widget class="QPushButton" name="btnTumuSil">
          <property name="text">
-          <string>Tümünü Sil</string>
+          <string>&amp;Tümünü Sil</string>
          </property>
         </widget>
        </item>
@@ -187,7 +190,7 @@
        <item row="2" column="0" colspan="2">
         <widget class="QPushButton" name="BtnDuyuru">
          <property name="text">
-          <string>Paylaş</string>
+          <string>&amp;Paylaş</string>
          </property>
         </widget>
        </item>
@@ -205,7 +208,10 @@
          <item>
           <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>Aktif ID</string>
+            <string>&amp;Aktif ID</string>
+           </property>
+           <property name="buddy">
+            <cstring>leAktifID</cstring>
            </property>
           </widget>
          </item>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
-    <height>336</height>
+    <width>485</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,54 +20,28 @@
       <item row="1" column="0">
        <widget class="QPushButton" name="btnZiyaret">
         <property name="text">
-         <string>Ziyaretler</string>
+         <string>&amp;Ziyaretler</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="btnZiyaretOlustur">
         <property name="text">
-         <string>Yeni Ziyaret Oluştur</string>
+         <string>&amp;Yeni Ziyaret Oluştur</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0" colspan="2">
        <widget class="QPushButton" name="btnHastalar">
         <property name="text">
-         <string>Hastalarım</string>
+         <string>&amp;Hastalarım</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="0" column="1" rowspan="2">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Orientation::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>272</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="2" rowspan="2">
-     <widget class="QTextBrowser" name="tbDuyurular"/>
-    </item>
     <item row="1" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>330</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
+     <widget class="QTextBrowser" name="tbDuyurular"/>
     </item>
    </layout>
   </widget>
@@ -76,7 +50,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>719</width>
+     <width>485</width>
      <height>21</height>
     </rect>
    </property>
