@@ -208,7 +208,7 @@
          <item>
           <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>&amp;Aktif ID</string>
+            <string>&amp;Aktif Yonetici ID</string>
            </property>
            <property name="buddy">
             <cstring>leAktifID</cstring>

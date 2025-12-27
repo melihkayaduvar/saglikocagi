@@ -124,6 +124,7 @@ void DoktorListe::on_BtnDoktorOlustur_clicked()
 {
     doktorekle doktorekleform;
     auto doktor = VERITABANI::vt().doktorlar().olustur();
+    doktorekleform.setAttribute(Qt::WA_QuitOnClose, false);
     doktorekleform.setVeri(doktor);
 
     auto cevap = doktorekleform.exec();
@@ -179,6 +180,7 @@ void DoktorListe::on_btnYeniSifre_clicked()
     if (!item) return;
     quint32 secilenid = ui->tableWidget->item(satir,0)->text().toUInt();
     yenisifrebelirle sifrefrm(secilenid, this);
+    sifrefrm.setAttribute(Qt::WA_QuitOnClose, false);
     sifrefrm.exec();
 }
 

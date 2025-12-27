@@ -1,12 +1,12 @@
 #include "receteliste.h"
-#include "recetekalemiliste.h"
 #include "ui/veri-liste/ui_receteliste.h"
 #include "../../Veri/veritabani.h"
 #include <qmessagebox.h>
 
-receteliste::receteliste(QWidget *parent)
+receteliste::receteliste(quint32 kid, QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::receteliste)
+    , ui(new Ui::receteliste),
+    m_kid(kid)
 {
     ui->setupUi(this);
 
@@ -21,7 +21,29 @@ receteliste::~receteliste()
 {
     delete ui;
 }
-
+void receteliste::ara()
+{
+    liste.clear();
+    if(ui->leAra->text().trimmed().isEmpty()){
+        liste = VERITABANI::vt().receteler().bul([this](ReceteTablosu::VeriPointer d){
+            return d->ziyaretid()==m_kid;
+        });
+    }else{
+        liste = VERITABANI::vt().receteler().bul([this](ReceteTablosu::VeriPointer d){
+            auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(d->ziyaretid());
+            auto id=ziyaret->hastaid();
+            auto hasta= VERITABANI::vt().hastalar().bul([&id](HastaTablosu::VeriPointer d){
+                return  d->id()==id;
+            });
+            return d->ziyaretid()==m_kid&&(QString::number(d->id()).contains(ui->leAra->text())||
+                   QString::number(d->ziyaretid()).contains(ui->leAra->text())||
+                   hasta[0]->adi().toLower().contains(ui->leAra->text().toLower())||
+                   hasta[0]->soyadi().toLower().contains(ui->leAra->text().toLower())||
+                   d->tarih().toString().toLower().contains(ui->leAra->text()));
+        });
+    }
+    tabloguncelle();
+}
 void receteliste::tabloguncelle()
 {
     ui->tableWidget->setRowCount(liste.size());
@@ -56,7 +78,7 @@ void receteliste::tabloguncelle()
         hucre2->setText(tr("%1").arg(liste[i]->gecerlilikSuresi()));
         ui->tableWidget->setItem(i,2,hucre2);
         QTableWidgetItem *hucre3 =new QTableWidgetItem;
-        auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(liste[i]->ziyaretid());
+        auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(m_kid);
         auto hastaid=ziyaret->hastaid();
         auto hasta=VERITABANI::vt().hastalar().bul([&hastaid](HastaTablosu::VeriPointer d){
             return d->id()==hastaid;
@@ -64,7 +86,7 @@ void receteliste::tabloguncelle()
         hucre3->setText(tr("%1").arg(hasta[0]->adi()+" "+hasta[0]->soyadi()));
         ui->tableWidget->setItem(i,3,hucre3);
         QTableWidgetItem *hucre4=new QTableWidgetItem;
-        hucre4->setText(tr("%1").arg(liste[i]->ziyaretid()));
+        hucre4->setText(tr("%1").arg(m_kid));
         ui->tableWidget->setItem(i,4,hucre4);
         QTableWidgetItem *hucre5=new QTableWidgetItem;
         hucre5->setText(tr("%1").arg(idler_n));
@@ -74,27 +96,6 @@ void receteliste::tabloguncelle()
     ui->tableWidget->setHorizontalHeaderLabels(basliklar);
 }
 
-void receteliste::ara()
-{
-    liste.clear();
-    if(ui->leAra->text().trimmed().isEmpty()){
-        liste = VERITABANI::vt().receteler().tumu();
-    }else{
-        liste = VERITABANI::vt().receteler().bul([this](ReceteTablosu::VeriPointer d){
-            auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(d->ziyaretid());
-            auto id=ziyaret->hastaid();
-            auto hasta= VERITABANI::vt().hastalar().bul([&id](HastaTablosu::VeriPointer d){
-                return  d->id()==id;
-            });
-            return QString::number(d->id()).contains(ui->leAra->text())||
-                QString::number(d->ziyaretid()).contains(ui->leAra->text())||
-                   hasta[0]->adi().toLower().contains(ui->leAra->text().toLower())||
-                   hasta[0]->soyadi().toLower().contains(ui->leAra->text().toLower())||
-                d->tarih().toString().toLower().contains(ui->leAra->text());
-        });
-    }
-    tabloguncelle();
-}
 
 void receteliste::tablewidget_silmesecimi()
 {
@@ -122,6 +123,7 @@ void receteliste::recetekalemleri()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     recetekalemiliste frm(id, this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     frm.exec();
     tabloguncelle();
 }

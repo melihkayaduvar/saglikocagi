@@ -119,7 +119,7 @@ void IlacListe::on_btnYeni_clicked()
     IlacEkle ilaceklefrm;
     auto ilac = VERITABANI::vt().ilaclar().olustur();
     ilaceklefrm.setVeri(ilac);
-
+    ilaceklefrm.setAttribute(Qt::WA_QuitOnClose, false);
     auto cevap=ilaceklefrm.exec();
     if(cevap==QDialog::Accepted){
         ilac=ilaceklefrm.getVeri();
@@ -159,6 +159,7 @@ void IlacListe::on_btnBilgi_clicked()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     ilacbilgi frm(id,this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     frm.exec();
 
     tabloguncelle();

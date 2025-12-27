@@ -246,6 +246,12 @@ void VERITABANI::sqlAyarlariniYap()
 
     tblRecete.setSqlSilmeIslemi([this](quint32 id){
         QSqlQuery q; q.prepare("DELETE FROM receteler WHERE id=?"); q.addBindValue(id); q.exec();
+        auto kalemler=VERITABANI::vt().recetekalemleri().bul([&id](ReceteKalemiTablosu::VeriPointer d){
+            return d->receteid()==id;
+        });
+        for(auto kalem:kalemler){
+            VERITABANI::vt().recetekalemleri().IdyeGoreSil(kalem->id());
+        }
     });
 
     tblRecete.setSqlGuncellemeIslemi([](ReceteTablosu::VeriPointer r){
@@ -271,6 +277,12 @@ void VERITABANI::sqlAyarlariniYap()
 
     tblTetkik.setSqlSilmeIslemi([this](quint32 id){
         QSqlQuery q; q.prepare("DELETE FROM tetkikler WHERE id=?"); q.addBindValue(id); q.exec();
+        auto isttetkikler = VERITABANI::vt().istenentetkikler().bul([&id](IstenenTetkikTablosu::VeriPointer d){
+            return d->tetkikid()==id;
+        });
+        for (auto &isttetkik:isttetkikler){
+            VERITABANI::vt().istenentetkikler().IdyeGoreSil(isttetkik->id());
+        }
     });
 
     tblTetkik.setSqlGuncellemeIslemi([](TetkikTablosu::VeriPointer t){
@@ -434,6 +446,7 @@ void VERITABANI::ilkYukleme()
         h->setCinsiyet((CinsiyetEnum)qHasta.value("cinsiyet").toInt());
         h->setAdres(qHasta.value("adres").toString());
         h->setKanGrubu(qHasta.value("kan_grubu").toString());
+
         QStringList alerjiListesi;
         QSqlQuery qAlerji;
         qAlerji.prepare("SELECT alerji_adi FROM hasta_alerjiler WHERE hasta_id=?");

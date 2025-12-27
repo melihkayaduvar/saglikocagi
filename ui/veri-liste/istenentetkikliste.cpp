@@ -4,9 +4,10 @@
 #include "../../Veri/veritabani.h"
 #include <QMessageBox>
 
-istenentetkikliste::istenentetkikliste(QWidget *parent)
+istenentetkikliste::istenentetkikliste(quint32 kid,QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::istenentetkikliste)
+    , ui(new Ui::istenentetkikliste),
+    m_kid(kid)
 {
     ui->setupUi(this);
     ara();
@@ -34,7 +35,9 @@ void istenentetkikliste::ara()
 {
     liste.clear();
     if(ui->leAra->text().trimmed().isEmpty()){
-        liste = VERITABANI::vt().istenentetkikler().tumu();
+        liste = VERITABANI::vt().istenentetkikler().bul([this](IstenenTetkikTablosu::VeriPointer d){
+            return d->ziyaretid()==m_kid;
+        });
     }else {
         liste = VERITABANI::vt().istenentetkikler().bul([this](IstenenTetkikTablosu::VeriPointer d){
             auto ziyaret=VERITABANI::vt().ziyaretler().IdyeGoreAra(d->ziyaretid());
@@ -43,13 +46,13 @@ void istenentetkikliste::ara()
                 return  d->id()==id;
             });
             auto tetkik = VERITABANI::vt().tetkikler().IdyeGoreAra(d->tetkikid());
-            return QString::number(d->id()).contains(ui->leAra->text())||
-                QString::number(d->ziyaretid()).contains(ui->leAra->text())||
-                hasta[0]->adi().toLower().contains(ui->leAra->text().toLower())||
-                hasta[0]->soyadi().toLower().contains(ui->leAra->text().toLower())||
-                tetkik->ad().toLower().contains(ui->leAra->text().toLower())||
-                ("ID:"+QString::number(tetkik->id())).contains(ui->leAra->text())||
-                TetkikDurumToString(d->durum()).toLower().contains(ui->leAra->text());
+            return d->ziyaretid()==m_kid&&(QString::number(d->id()).contains(ui->leAra->text())||
+                                               QString::number(d->ziyaretid()).contains(ui->leAra->text())||
+                                               hasta[0]->adi().toLower().contains(ui->leAra->text().toLower())||
+                                               hasta[0]->soyadi().toLower().contains(ui->leAra->text().toLower())||
+                                               tetkik->ad().toLower().contains(ui->leAra->text().toLower())||
+                                               ("ID:"+QString::number(tetkik->id())).contains(ui->leAra->text())||
+                                               TetkikDurumToString(d->durum()).toLower().contains(ui->leAra->text()));
         });
     }
     tabloguncelle();
@@ -67,6 +70,7 @@ void istenentetkikliste::duzenleTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     istenentetkikduzenle frm(id, this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     if(frm.exec() == QDialog::Accepted){
         auto guncelVeri = frm.getVeri();
         VERITABANI::vt().istenentetkikler().duzenle(id,[guncelVeri](auto& veri){

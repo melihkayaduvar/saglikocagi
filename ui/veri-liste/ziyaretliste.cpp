@@ -4,7 +4,9 @@
 #include "../../Veri/veritabani.h"
 #include <qmessagebox.h>
 #include "../veri-giris/receteekle.h"
+#include "receteliste.h"
 #include "../veri-giris//istenentetkikekle.h"
+#include "istenentetkikliste.h"
 
 ziyaretliste::ziyaretliste(quint32 kid, QWidget *parent)
     : QDialog(parent)
@@ -19,6 +21,8 @@ ziyaretliste::ziyaretliste(quint32 kid, QWidget *parent)
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged ,this, &ziyaretliste::tablewidget_silmesecimi);
     connect(ui->btnReceteOlustur, &QPushButton::clicked,this,&ziyaretliste::receteolustur);
     connect(ui->btnTetkikIste, &QPushButton::clicked,this,&ziyaretliste::tetkikiste);
+    connect(ui->btnReceteler,&QPushButton::clicked,this,&ziyaretliste::receteler);
+    connect(ui->btnIstTetkikler,&QPushButton::clicked,this,&ziyaretliste::tetkikler);
 }
 
 ziyaretliste::~ziyaretliste()
@@ -131,7 +135,8 @@ void ziyaretliste::tablewidget_silmesecimi()
     bool secimVarMi = !ui->tableWidget->selectedItems().isEmpty();
     ui->btnReceteOlustur->setEnabled(secimVarMi);
     ui->btnTetkikIste->setEnabled(secimVarMi);
-    //ui->btnSil->setEnabled(secimVarMi);
+    ui->btnIstTetkikler->setEnabled(secimVarMi);
+    ui->btnReceteler->setEnabled(secimVarMi);
 }
 
 void ziyaretliste::receteolustur()
@@ -150,6 +155,41 @@ void ziyaretliste::receteolustur()
     int satir = ui->tableWidget->currentRow();
     auto id = ui->tableWidget->item(satir,0)->text().toUInt();
     receteekle frm(id);
+    auto recete = VERITABANI::vt().receteler().olustur();
+    frm.setAttribute(Qt::WA_QuitOnClose,false);
+    frm.setVeri(recete);
+    auto cevap = frm.exec();
+
+    if(cevap==QDialog::Accepted){
+        recete=frm.getVeri();
+        VERITABANI::vt().receteler().ekle(recete);
+        for (auto &kalem:recete->kalemler()){
+            kalem->setReceteId(recete->id());
+            VERITABANI::vt().recetekalemleri().ekle(kalem);
+        }
+        QMessageBox::information(this,
+                                 tr("Bilgilendirme"),
+                                 tr("%1 ID'li Reçete Oluşturuldu").arg(recete->id()));
+    }
+    ara();
+}
+
+void ziyaretliste::receteler()
+{
+    auto selectedRanges = ui->tableWidget->selectedRanges();
+    QSet<int> selectedRows;
+    for (auto &range : selectedRanges) {
+        for (int row = range.topRow(); row <= range.bottomRow(); ++row) {
+            selectedRows.insert(row);
+        }
+    }
+    if (selectedRows.size() > 1) {
+        QMessageBox::warning(this, tr("Uyarı"), tr("Lütfen sadece bir satır seçiniz."));
+        return;
+    }
+    int satir = ui->tableWidget->currentRow();
+    auto id = ui->tableWidget->item(satir,0)->text().toUInt();
+    receteliste frm(id);
     frm.setAttribute(Qt::WA_QuitOnClose,false);
     frm.exec();
 }
@@ -170,10 +210,20 @@ void ziyaretliste::tetkikiste()
     int satir = ui->tableWidget->currentRow();
     auto id = ui->tableWidget->item(satir,0)->text().toUInt();
     IstenenTetkikEkle frm(id);
+    auto isttetkik=VERITABANI::vt().istenentetkikler().olustur();
     frm.setAttribute(Qt::WA_QuitOnClose,false);
-    frm.exec();
+    frm.setVeri(isttetkik);
+    auto cevap=frm.exec();
+    if(cevap==QDialog::Accepted){
+        isttetkik=frm.getVeri();
+        VERITABANI::vt().istenentetkikler().ekle(isttetkik);
+        QMessageBox::information(this,
+                                 tr("Bilgilendirme"),
+                                 tr("%1 id'li tetkik talep edildi.").arg(isttetkik->tetkikid()));
+    }
 }
-/*void ziyaretliste::on_btnSil_clicked()
+
+void ziyaretliste::tetkikler()
 {
     auto selectedRanges = ui->tableWidget->selectedRanges();
     QSet<int> selectedRows;
@@ -186,35 +236,13 @@ void ziyaretliste::tetkikiste()
         QMessageBox::warning(this, tr("Uyarı"), tr("Lütfen sadece bir satır seçiniz."));
         return;
     }
-    auto x = QMessageBox::question(this,tr("Onay"),tr("Silme İşlemini Onaylıyormusunuz"));
-    if(x==QMessageBox::Yes){
-        int satir = ui->tableWidget->currentRow();
-        if (satir>=0) {
-            auto silinecekid = ui->tableWidget->item(satir,0)->text().toUInt();
-            ui->tableWidget->removeRow(satir);
-            VERITABANI::vt().ziyaretler().IdyeGoreSil(silinecekid);
-            auto silinecektetkik = VERITABANI::vt().istenentetkikler().bul([&silinecekid](IstenenTetkikTablosu::VeriPointer d){
-                return d->ziyaretid()==silinecekid;
-            });
-            for(auto &i:silinecektetkik){
-                VERITABANI::vt().istenentetkikler().IdyeGoreSil(i->id());
-            }
-            auto silinecekrecete = VERITABANI::vt().receteler().bul([&silinecekid](ReceteTablosu::VeriPointer d){
-                return d->ziyaretid()==silinecekid;
-            });
-            for(auto &i:silinecekrecete){
-                auto id=i->id();
-                auto silinecekkalemler = VERITABANI::vt().recetekalemleri().bul([&id](ReceteKalemiTablosu::VeriPointer d){
-                    return d->receteid()==id;
-                });
-                VERITABANI::vt().receteler().IdyeGoreSil(i->id());
-                for (auto &j:silinecekkalemler){
-                    VERITABANI::vt().recetekalemleri().IdyeGoreSil(j->id());
-                }
-            }
-        }
-    }
-}*/
+    int satir = ui->tableWidget->currentRow();
+    auto id = ui->tableWidget->item(satir,0)->text().toUInt();
+    istenentetkikliste frm(id);
+    frm.setAttribute(Qt::WA_QuitOnClose,false);
+    frm.exec();
+}
+
 
 void ziyaretliste::on_leAra_textChanged(const QString &arg1)
 {

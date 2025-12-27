@@ -2,6 +2,7 @@
 
 #include <QDialog>
 #include "../../Veri/Araclar/TABLO_TANIMLARI.h"
+#include "recetekalemiliste.h"
 
 namespace Ui {
 class receteliste;
@@ -12,7 +13,7 @@ class receteliste : public QDialog
     Q_OBJECT
 
 public:
-    explicit receteliste(QWidget *parent = nullptr);
+    explicit receteliste(quint32 kid,QWidget *parent = nullptr);
     ~receteliste();
 
     void tabloguncelle();
@@ -27,4 +28,5 @@ private slots:
 private:
     Ui::receteliste *ui;
     ReceteTablosu::VeriDizisi liste;
+    quint32 m_kid;
 };

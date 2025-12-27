@@ -43,6 +43,7 @@ void dkHastaListe::bilgiTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     HastaBilgi frm(id,this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     frm.exec();
 
     tabloguncelle();
@@ -67,6 +68,7 @@ void dkHastaListe::ziyaretTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     ziyaretliste frm(id,this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     frm.exec();
 
     tabloguncelle();

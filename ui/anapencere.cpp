@@ -167,7 +167,7 @@ void anapencere::on_actionistetnentetkikekle_triggered()
 
 void anapencere::on_actionistenentetkiklist_triggered()
 {
-    istenentetkikliste istenentetkiklistfrm;
+    istenentetkikliste istenentetkiklistfrm(-1);
     istenentetkiklistfrm.exec();
 }
 
@@ -195,7 +195,7 @@ void anapencere::on_actionreceteekle_triggered()
 
 void anapencere::on_actionrecetelist_triggered()
 {
-    receteliste recetelistefrm;
+    receteliste recetelistefrm(-1);
     recetelistefrm.exec();
 }
 //İlac

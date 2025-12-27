@@ -18,7 +18,9 @@ public:
     void tabloguncelle();
     void tablewidget_silmesecimi();
     void receteolustur();
+    void receteler();
     void tetkikiste();
+    void tetkikler();
 private slots:
     void on_leAra_textChanged(const QString &arg1);
 

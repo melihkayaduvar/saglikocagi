@@ -12,7 +12,7 @@ class istenentetkikliste : public QDialog
     Q_OBJECT
 
 public:
-    explicit istenentetkikliste(QWidget *parent = nullptr);
+    explicit istenentetkikliste(quint32 kid,QWidget *parent = nullptr);
     ~istenentetkikliste();
 
     void ara();
@@ -27,4 +27,5 @@ private slots:
 private:
     Ui::istenentetkikliste *ui;
     IstenenTetkikTablosu::VeriDizisi liste;
+    quint32 m_kid;
 };

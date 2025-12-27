@@ -56,6 +56,7 @@ void TetkikListe::duzenleTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     tetkikduzenle frm(id, this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     if(frm.exec() == QDialog::Accepted){
         auto guncelVeri = frm.getVeri();
         VERITABANI::vt().tetkikler().duzenle(id,[guncelVeri](auto& veri){
@@ -141,7 +142,7 @@ void TetkikListe::on_btnEkle_clicked()
     tetkikekle tetkikfrm;
     auto tetkik = VERITABANI::vt().tetkikler().olustur();
     tetkikfrm.setVeri(tetkik);
-
+    tetkikfrm.setAttribute(Qt::WA_QuitOnClose, false);
     auto cevap=tetkikfrm.exec();
     if(cevap==QDialog::Accepted){
         tetkik=tetkikfrm.getVeri();

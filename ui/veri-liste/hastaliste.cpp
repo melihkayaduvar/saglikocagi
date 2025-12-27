@@ -41,6 +41,7 @@ void HastaListe::bilgiTiklandi()
     quint32 id = ui->tableWidget->item(row, 0)->text().toUInt();
 
     HastaBilgi frm(id,this);
+    frm.setAttribute(Qt::WA_QuitOnClose, false);
     frm.exec();
 
     tabloguncelle();
@@ -187,6 +188,7 @@ void HastaListe::on_btnHastaOlustur_clicked()
 {
     HastaEkle hastaekleform;
     auto hasta = VERITABANI::vt().hastalar().olustur();
+    hastaekleform.setAttribute(Qt::WA_QuitOnClose, false);
     hastaekleform.setVeri(hasta);
 
     auto cevap = hastaekleform.exec();
