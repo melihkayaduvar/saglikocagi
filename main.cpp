@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
 
     login frm;
     frm.show();
-
     auto sonuc = app.exec();
 
     return sonuc;

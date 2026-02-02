@@ -34,7 +34,7 @@
       <item row="0" column="0" colspan="2">
        <widget class="QPushButton" name="btnHastalar">
         <property name="text">
-         <string>&amp;Hastalarım</string>
+         <string>&amp;Hastalar</string>
         </property>
        </widget>
       </item>
